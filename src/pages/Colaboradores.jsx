@@ -3,12 +3,14 @@ import linkedinImg from "../assets/img/Linkedin.png";
 import inversoresImg from "../assets/img/inversores.jpg";
 import patrocinadoresImg from "../assets/img/creadores.jpg";
 import cocreacionImg from "../assets/img/pilar.jpg";
+import ContactModal from './contactModal.jsx';
 
 // Define el número de WhatsApp de la empresa (formato internacional sin "+")
 const WHATSAPP_NUMBER = '34611891848'; // ¡ASEGÚRATE DE CAMBIAR ESTO POR EL NÚMERO REAL DE TU EMPRESA!
 
 const Colaboradores = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [showContactModal, setShowContactModal] = useState(false); // Estado para controlar la visibilidad del modal
 
   // Función para abrir WhatsApp
   const openWhatsAppChat = (messageText) => {
@@ -16,6 +18,10 @@ const Colaboradores = () => {
     const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
     window.open(whatsappLink, '_blank');
   };
+
+  // Funciones para abrir y cerrar el modal de contacto
+  const handleOpenContactModal = () => setShowContactModal(true);
+  const handleCloseContactModal = () => setShowContactModal(false);
 
   const colaboradoresData = [
     {
@@ -95,7 +101,7 @@ const Colaboradores = () => {
                 style={{
                   width: '100px',
                   height: '4px',
-                  background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
+                  background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                   borderRadius: '2px'
                 }}
               ></div>
@@ -222,7 +228,7 @@ const Colaboradores = () => {
                             className="btn fw-semibold px-4 py-2"
                             onClick={() => openWhatsAppChat(item.whatsappMessage)} // Llama a la función para abrir WhatsApp
                             style={{
-                              background: 'linear-gradient(135deg, #a855f7, #06b6d4)',
+                              background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                               border: 'none',
                               color: 'white',
                               borderRadius: '25px',
@@ -269,9 +275,9 @@ const Colaboradores = () => {
                 <button
                   type="button"
                   className="btn btn-lg px-5 py-3 fw-semibold"
-                  onClick={() => openWhatsAppChat('¡Hola! Me gustaría iniciar una conversación sobre cómo colaborar con IN RESET.')} // Mensaje predefinido para este botón
+                  onClick={handleOpenContactModal} // CAMBIO AQUÍ: Ahora abre el modal de contacto
                   style={{
-                    background: 'linear-gradient(135deg, #a855f7, #06b6d4)',
+                    background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                     border: 'none',
                     color: 'white',
                     borderRadius: '50px',
@@ -323,6 +329,9 @@ const Colaboradores = () => {
           }}
         ></div>
       </div>
+
+      {/* Contact Modal Component - Added here */}
+      <ContactModal show={showContactModal} handleClose={handleCloseContactModal} />
     </section>
   );
 };

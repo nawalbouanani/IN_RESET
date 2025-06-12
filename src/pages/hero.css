@@ -1,323 +1,214 @@
-/* ===== KEYFRAMES Y ANIMACIONES ===== */
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+/* hero.css */
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(168, 85, 247, 0.9), 0 0 60px rgba(168, 85, 247, 0.6);
-  }
-}
-
-/* ===== HERO SECTION ===== */
+/* Arreglos para el Hero */
 .hero-section {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 90vh; /* O 100vh si quieres que ocupe toda la altura de la ventana */
+  position: relative; /* ¡Crucial para posicionar los elementos hijos! */
+  overflow: hidden; /* Oculta cualquier contenido que se desborde */
 }
 
-/* ===== VIDEO BACKGROUND ===== */
-.hero-video {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  filter: brightness(0.9); /* Más brillo para que se vea mejor */
-  transition: filter 0.5s ease;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.hero-video.loaded {
-  filter: brightness(1); /* Sin filtro cuando está cargado */
-}
-
-/* ===== FALLBACK PARA ERROR DE VIDEO ===== */
-.hero-fallback {
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(135deg, #6b46c1 0%, #a855f7 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 1;
-}
-
-.fallback-text {
-  color: white;
-  text-align: center;
-  font-size: 18px;
-  margin: 0;
-}
-
-/* ===== CONTENIDO PRINCIPAL ===== */
-.hero-content {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.1); /* Fondo muy sutil para mejorar legibilidad */
-}
-
-.pt-navbar-offset {
-  padding-top: 60px; /* Reducido para dar más espacio al contenido */
-}
-
-/* ===== TÍTULOS EN PÚRPURA - MÁS PEQUEÑOS ===== */
+/* --- Estilos de los Textos del Hero --- */
 .hero-title-purple {
-  color: #a855f7; /* Púrpura vibrante */
-  text-shadow: 2px 2px 8px rgba(0,0,0,0.8); /* Sombra más fuerte para legibilidad */
-  font-weight: 700;
+  color: #a855f7 !important; /* Color principal púrpura */
+  font-size: 2.8rem; /* AÚN MÁS REDUCIDO para el título principal */
+  line-height: 1.1; 
+  /* font-weight: bold; (Ya lo manejas con fw-bold en JSX) */
+  /* margin-bottom: 0; (Ya lo manejas con mb-0 en JSX) */
 }
 
-.fs-hero-title-main {
-  font-size: clamp(1.8rem, 4vw, 2.5rem); /* Más pequeño */
+/* Clase específica para el primer h1 si necesita un tamaño distinto */
+.fs-hero-title-main { 
+    /* Esta clase puede quedar vacía o definir un tamaño si difiere del .hero-title-purple base */
 }
 
-.fs-hero-title-secondary {
-  font-size: clamp(1.6rem, 3.5vw, 2.2rem); /* Más pequeño */
+.fs-hero-title-secondary { /* Clase específica para el segundo h1 */
+  font-size: 2.8rem; /* AÚN MÁS REDUCIDO, para que sea menor que el principal */
+  line-height: 1.1;
+  /* margin-bottom: 3rem; (Ya lo manejas con mb-3 en JSX) */
 }
 
-/* ===== DESCRIPCIÓN EN PÚRPURA ===== */
 .hero-description-purple {
-  color: #c084fc; /* Púrpura más claro para la descripción */
-  text-shadow: 1px 1px 4px rgba(0,0,0,0.8);
-  max-width: 500px; /* Ancho más compacto */
-  line-height: 1.5;
+  color: #e5e7eb !important; /* Color de la descripción */
+  font-size: 0.95rem; /* REDUCIDO para un tamaño de lectura cómodo */
+  line-height: 1.6;
+  max-width: 500px; /* UN POCO MÁS ESTRECHO: para que se vea más centrado y menos "barra" */
+  margin-left: auto; /* ¡CLAVE PARA CENTRAR EL BLOQUE CON MAX-WIDTH! */
+  margin-right: auto; /* ¡CLAVE PARA CENTRAR EL BLOQUE CON MAX-WIDTH! */
+  /* margin-bottom: 4rem; (Ya lo manejas con mb-4 en JSX) */
 }
 
-.fs-hero-description {
-  font-size: clamp(0.85rem, 2vw, 1.1rem); /* Más pequeño */
-}
-
-/* ===== BOTÓN TECNOLÓGICO CON EFECTO BRILLANTE ===== */
+/* --- Estilos del Botón --- */
 .btn-tech-compact {
-  background: linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7);
-  background-size: 200% 200%;
-  border: none;
+  background: linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7) !important;
+  border: none !important;
   color: white !important;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  transition: all 0.4s ease;
-  font-size: 0.9rem;
-  border-radius: 50px; /* Más redondeado como en la imagen */
-  box-shadow: 
-    0 4px 15px rgba(139, 92, 246, 0.4),
-    0 0 30px rgba(139, 92, 246, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  animation: gradientShift 3s ease-in-out infinite;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Animación del gradiente */
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Efecto de brillo adicional */
-.btn-tech-compact::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.6s;
-}
-
-.btn-tech-compact:hover::before {
-  left: 100%;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 10px 20px !important; /* REDUCIDO: Antes 12px 24px */
+  font-size: 0.9rem !important; /* REDUCIDO: Tamaño de fuente del botón */
+  border-radius: 8px !important; 
+  cursor: pointer; 
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3) !important;
+  pointer-events: auto; /* ¡MUY IMPORTANTE! Permite que el botón sea clickeable */
 }
 
 .btn-tech-compact:hover {
-  color: white !important;
-  transform: translateY(-3px);
-  box-shadow: 
-    0 8px 25px rgba(139, 92, 246, 0.6),
-    0 0 40px rgba(139, 92, 246, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  animation: gradientShift 1s ease-in-out infinite;
+  transform: translateY(-2px) !important; 
+  box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4) !important;
 }
 
-.btn-tech-compact:focus {
-  box-shadow: 
-    0 0 0 0.2rem rgba(139, 92, 246, 0.5),
-    0 4px 15px rgba(139, 92, 246, 0.4);
-  color: white !important;
-}
-
-/* ===== LOADING SCREEN ===== */
-.loading-screen {
+/* --- Fondo de Video (si se usa, por si acaso) --- */
+.hero-video {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  height: calc(100vh - 60px); /* Ajusta si tu hero-section no es 100vh */
+  object-fit: cover; /* Asegura que el video cubra el área */
+  z-index: 0; /* Capa más baja (fondo) */
+  pointer-events: none; /* Ignora eventos del mouse */
+}
+
+/* --- CONTENIDO PRINCIPAL (TEXTOS Y BOTÓN) --- */
+.hero-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; /* Cubre todo el hero-section */
+  z-index: 2; /* Por encima de NetworkAnimation (z-index: 1) */
+  
+  /* Las propiedades de display, flex-direction, justify-content, align-items
+     se manejan en el JSX con las clases de Bootstrap. */
+  pointer-events: none; /* ¡CRUCIAL! Permite que el mouse "atraviese" este div
+                           para interactuar con el canvas de NetworkAnimation debajo */
+}
+
+/* Contenedor de Texto y Botón */
+.hero-text-container {
+  /* text-align: center; se mueve al col-12 en el JSX. */
+  /* max-width: 700px; - No es necesario si la descripción ya tiene su propio max-width y se centra */
+  padding: 0 15px; /* Padding horizontal para pantallas pequeñas */
+  margin-bottom: 60px; /* Ajusta este valor si necesitas más/menos espacio del ticker */
+}
+
+
+/* --- Ticker de Logros --- */
+.achievements-ticker {
+  position: absolute;
   bottom: 0;
-  background: linear-gradient(135deg, #6b46c1 0%, #a855f7 100%);
+  left: 0;
+  width: 100%;
+  height: 60px; /* Altura definida para el ticker */
+  background: rgba(0, 0, 0, 0.4); /* Fondo semi-transparente */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque detrás del ticker */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Borde superior sutil */
+  z-index: 3; /* Por encima de hero-content y NetworkAnimation */
+  overflow: hidden; /* ¡CRUCIAL para la animación de carrusel! Oculta el contenido que se desborda */
+  /* NO poner pointer-events: none; aquí, ya que no es interactivo y no debe bloquear el mouse. */
+}
+
+.ticker-container {
+  height: 100%; /* Ocupa toda la altura del padre */
+  display: flex;
+  align-items: center; /* Centra verticalmente el contenido del ticker */
+}
+
+.ticker-content {
   display: flex;
   align-items: center;
-  justify-content: center;
-  z-index: 10;
+  white-space: nowrap; /* ¡CRUCIAL! Evita que los items se envuelvan a la siguiente línea */
+  animation: scroll-left 45s linear infinite; /* Animación de desplazamiento */
+  will-change: transform; /* Hint para optimización de la animación */
 }
 
-.loading-content {
-  text-align: center;
-  color: white;
-}
-
-.loading-spinner {
-  width: 80px;
-  height: 80px;
-  border: 3px solid rgba(255,255,255,0.3);
-  border-top: 3px solid #fff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 20px;
-}
-
-.loading-title {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-}
-
-.loading-bar-container {
-  width: 200px;
-  height: 4px;
-  background: rgba(255,255,255,0.2);
-  border-radius: 2px;
-  overflow: hidden;
-  margin: 0 auto;
-}
-
-.loading-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #a855f7, #c084fc);
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-.loading-percentage {
+.ticker-item {
+  color: #ffffff; /* Color del texto de los items del ticker */
   font-size: 14px;
-  opacity: 0.8;
-  margin-top: 10px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  margin-right: 2rem; /* Espaciado entre items */
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
 }
 
-/* ===== CLASES DE ANIMACIÓN ===== */
-.animate-fade-up {
-  animation: fadeInUp 1s ease-out forwards;
+.ticker-separator {
+  margin-left: 2rem; /* Espaciado para el separador */
+  color: #a855f7; /* Color del separador */
+  font-weight: bold;
 }
 
-.animate-delay-1 {
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-.animate-delay-2 {
-  animation-delay: 0.4s;
-  opacity: 0;
-}
-
-.animate-delay-3 {
-  animation-delay: 0.6s;
-  opacity: 0;
-}
-
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  .hero-content {
-    padding: 0 15px;
+/* --- Animación del ticker --- */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
   }
-
-  .fs-hero-title-main {
-    font-size: clamp(1.5rem, 6vw, 2rem);
-  }
-
-  .fs-hero-title-secondary {
-    font-size: clamp(1.3rem, 5vw, 1.8rem);
-  }
-
-  .fs-hero-description {
-    font-size: clamp(0.8rem, 3.5vw, 1rem);
-  }
-
-  .btn-tech-compact {
-    font-size: 0.8rem;
-    padding: 10px 20px !important;
-  }
-
-  .loading-title {
-    font-size: 16px;
-  }
-
-  .loading-bar-container {
-    width: 150px;
-  }
-
-  .pt-navbar-offset {
-    padding-top: 40px;
+  100% {
+    transform: translateX(-33.333%); /* Desplaza 1/3 del contenido para un bucle perfecto (asumiendo 3x contenido) */
   }
 }
 
-@media (max-width: 576px) {
-  .loading-spinner {
-    width: 60px;
-    height: 60px;
-  }
-
-  .hero-description-purple {
-    max-width: 100%;
-  }
+/* Pausa la animación del ticker al pasar el mouse */
+.achievements-ticker:hover .ticker-content {
+  animation-play-state: paused;
 }
 
-/* ===== MEJORAS DE ACCESIBILIDAD ===== */
-@media (prefers-reduced-motion: reduce) {
-  .animate-fade-up,
-  .loading-spinner,
-  .btn-tech-compact {
-    animation: none;
-  }
-
-  .hero-video {
-    transition: none;
-  }
-}
-
-/* ===== SOPORTE PARA NAVEGADORES ===== */
-@supports not (-webkit-background-clip: text) {
+/* --- Responsive Design --- */
+@media (max-width: 992px) { /* Para tablets y pantallas más pequeñas */
   .hero-title-purple {
-    color: #a855f7;
+    font-size: 2.2rem; /* REDUCIDO para tablets */
+  }
+  .fs-hero-title-secondary { 
+    font-size: 1.8rem; /* REDUCIDO para tablets */
+  }
+  .hero-description-purple {
+    font-size: 0.9rem; /* REDUCIDO para tablets */
+  }
+}
+
+@media (max-width: 768px) { /* Para móviles */
+  .hero-title-purple {
+    font-size: 1.6rem; /* AÚN MÁS REDUCIDO para móviles */
+  }
+  .fs-hero-title-secondary {
+    font-size: 1.2rem; /* AÚN MÁS REDUCIDO para móviles */
+  }
+  .hero-description-purple {
+    font-size: 0.8rem; /* Un poco más pequeño para móviles */
+    margin-bottom: 1rem;
+    max-width: 90%; /* Ajusta el ancho máximo en móviles para que no se pegue a los bordes */
+  }
+  .btn-tech-compact {
+    padding: 8px 16px !important; /* Más pequeño */
+    font-size: 0.75rem !important; /* Más pequeño */
+  }
+  .achievements-ticker {
+    height: 40px; /* Altura reducida para móviles */
+  }
+  .ticker-item {
+    font-size: 11px;
+    margin-right: 1rem;
+  }
+  .ticker-separator {
+    margin-left: 1rem;
+  }
+  .ticker-content {
+    animation-duration: 30s; /* Animación un poco más rápida para móviles */
+  }
+  .hero-text-container {
+    margin-bottom: 30px; /* Ajuste para espacio en móviles */
+  }
+}
+
+/* Efecto glassmorphism más sutil para pantallas grandes */
+@media (min-width: 1200px) {
+  .achievements-ticker {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
   }
 }

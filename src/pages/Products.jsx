@@ -1,6 +1,6 @@
 import React from 'react';
 import herCodeImage from "../assets/img/hercode.jpg"; 
-import defemmeImage from "../assets/img/defemme.jpeg";
+import defemmeImage from "../assets/img/defemme.jpg";
 
 const TechEmpowermentProducts = () => {
   return (
