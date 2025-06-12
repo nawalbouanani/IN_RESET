@@ -10,7 +10,7 @@ const TechEmpowermentProducts = () => {
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-4" 
               style={{ 
-                background: 'linear-gradient(135deg, #a855f7, #06b6d4)',
+                background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'

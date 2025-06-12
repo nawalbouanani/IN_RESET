@@ -86,15 +86,15 @@ const Colaboradores = () => {
             {/* Header */}
             <div className="text-center mb-5">
               <h2
-                className="display-4 fw-bold mb-3 text-white"
+                className="display-6 fw-bold mb-3 text-white"
                 style={{
-                  background: 'linear-gradient(135deg, #a855f7, #06b6d4)',
+                  background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'
                 }}
               >
-                COLABORA CON NOSOTRAS
+                Colabora con Nosotras
               </h2>
               <div
                 className="mx-auto mb-4"

@@ -125,7 +125,7 @@ const ContactModal = ({ show, handleClose }) => {
                   <h2 className="text-white text-center font-bold mb-1"
                       style={{
                         fontSize: '1.5rem',
-                        background: 'linear-gradient(135deg, #a855f7, #06b6d4)',
+                        background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
                         backgroundClip: 'text',
