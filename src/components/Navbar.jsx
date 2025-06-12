@@ -18,33 +18,34 @@ export const Navbar = () => {
     >
       <div
         className="container-fluid d-flex justify-content-between align-items-center" // container-fluid y d-flex justify-content-between para extremos
-        // Eliminamos maxWidth aquí para que el container-fluid ocupe todo el ancho
-        // Si necesitas un ancho máximo, puedes volver a agregarlo y centrar la navbar en un div padre.
+      // Eliminamos maxWidth aquí para que el container-fluid ocupe todo el ancho
+      // Si necesitas un ancho máximo, puedes volver a agregarlo y centrar la navbar en un div padre.
       >
         {/* Logo de la marca */}
-        <Link 
-          className="navbar-brand py-0 me-auto ps-3" // py-0 elimina padding vertical, me-auto empuja, ps-3 añade padding-left
-          to="/" 
-          style={{ 
-            height: '50px', // Altura del contenedor del logo
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'start', 
+        <a
+          href="#hero"
+          className="navbar-brand py-0 me-auto ps-3"
+          style={{
+            height: '50px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'start',
+            cursor: 'pointer'
           }}
         >
           <img
             src={logo}
             alt="Logo"
-            // Controla el tamaño del logo aquí.
             style={{
-              width: '150px', // Ajusta este valor para el tamaño del logo.
+              width: '150px',
               height: 'auto',
-              maxHeight: '100%', // Asegura que no exceda la altura del Link padre
+              maxHeight: '100%',
               filter: 'drop-shadow(0 0 5px rgba(168, 85, 247, 0.5))',
               display: 'block'
             }}
           />
-        </Link>
+        </a>
+
 
         {/* Botón del menú hamburguesa para responsive */}
         <button
@@ -65,9 +66,9 @@ export const Navbar = () => {
 
         {/* Menú de navegación */}
         <div className="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul className="navbar-nav ms-auto pe-3"> {/* ms-auto para empujar a la derecha, pe-3 para padding-right */}
+          <ul className="navbar-nav ms-auto pe-3">
             <li className="nav-item">
-              <Link className="nav-link text-white mx-2 py-1" to="/sobre-nosotros" // mx-2 para margen horizontal entre links
+              <a className="nav-link text-white mx-2 py-1" href="#nosotros"
                 style={{
                   transition: 'color 0.3s ease',
                   fontSize: '1.05rem',
@@ -76,10 +77,10 @@ export const Navbar = () => {
                 onMouseOver={(e) => e.target.style.color = '#a855f7'}
                 onMouseOut={(e) => e.target.style.color = 'white'}>
                 Sobre Nosotros
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white mx-2 py-1" to="/pilares"
+              <a className="nav-link text-white mx-2 py-1" href="#pilares"
                 style={{
                   transition: 'color 0.3s ease',
                   fontSize: '1.05rem',
@@ -88,22 +89,10 @@ export const Navbar = () => {
                 onMouseOver={(e) => e.target.style.color = '#a855f7'}
                 onMouseOut={(e) => e.target.style.color = 'white'}>
                 Pilares
-              </Link>
-            </li>
-            <li className="nav-item ">
-              <Link className="nav-link text-white mx-2 py-1" to="/contacto"
-                style={{
-                  transition: 'color 0.3s ease',
-                  fontSize: '1.05rem',
-                  lineHeight: '1.2'
-                }}
-                onMouseOver={(e) => e.target.style.color = '#06b6d4'}
-                onMouseOut={(e) => e.target.style.color = 'white'}>
-                Contacto
-              </Link>
+              </a>
             </li>
             <li className="nav-item">
-              <Link className="nav-link text-white mx-2 py-1" to="/proyectos"
+              <a className="nav-link text-white mx-2 py-1" href="#proyectos"
                 style={{
                   transition: 'color 0.3s ease',
                   fontSize: '1.05rem',
@@ -112,8 +101,20 @@ export const Navbar = () => {
                 onMouseOver={(e) => e.target.style.color = '#06b6d4'}
                 onMouseOut={(e) => e.target.style.color = 'white'}>
                 Proyectos
-              </Link>
+              </a>
             </li>
+            <li className="nav-item">
+              <a className="nav-link text-white mx-2 py-1" href="#contacto"
+                style={{
+                  transition: 'color 0.3s ease',
+                  fontSize: '1.05rem',
+                  lineHeight: '1.2'
+                }}
+                onMouseOver={(e) => e.target.style.color = '#06b6d4'}
+                onMouseOut={(e) => e.target.style.color = 'white'}>
+                Contacto
+              </a>
+            </li>            
           </ul>
         </div>
       </div>

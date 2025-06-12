@@ -2,14 +2,14 @@ import React from 'react';
 
 const About = () => {
   return (
-    <section className="py-5" >
+    <section id="nosotros" className="py-5"  >
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
             {/* Header */}
             <div className="text-center mb-5">
               <h2
-                className="display-4 fw-bold mb-4 text-white"
+                className="display-4 fw-bold mb-3 mt-4 text-white"
                 style={{
                   background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
                   WebkitBackgroundClip: 'text',
@@ -20,7 +20,7 @@ const About = () => {
                 IN RESET
               </h2>
               <div
-                className="mx-auto mb-4"
+                className="mx-auto"
                 style={{
                   width: '80px',
                   height: '4px',
@@ -87,8 +87,8 @@ const About = () => {
                       <div
                         className="d-inline-flex align-items-center justify-content-center mb-3"
                         style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '50px',
+                          height: '50px',
                           background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                           borderRadius: '50%',
                           boxShadow: '0 4px 20px rgba(168, 85, 247, 0.3)'
@@ -108,8 +108,8 @@ const About = () => {
                       <div
                         className="d-inline-flex align-items-center justify-content-center mb-3"
                         style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '50px',
+                          height: '50px',
                           background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                           borderRadius: '50%',
                           boxShadow: '0 4px 20px rgba(6, 182, 212, 0.3)'
@@ -129,8 +129,8 @@ const About = () => {
                       <div
                         className="d-inline-flex align-items-center justify-content-center mb-3"
                         style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '50px',
+                          height: '50px',
                           background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                           borderRadius: '50%',
                           boxShadow: '0 4px 20px rgba(168, 85, 247, 0.3)'
@@ -150,8 +150,8 @@ const About = () => {
                       <div
                         className="d-inline-flex align-items-center justify-content-center mb-3"
                         style={{
-                          width: '60px',
-                          height: '60px',
+                          width: '50px',
+                          height: '50px',
                           background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                           borderRadius: '50%',
                           boxShadow: '0 4px 20px rgba(6, 182, 212, 0.3)'

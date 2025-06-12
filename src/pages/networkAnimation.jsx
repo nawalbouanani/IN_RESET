@@ -1,12 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 // --- Perlin Noise Implementation (Compact) ---
-// From: https://gist.github.com/banksean/3045220
-// Simplified for this specific use case
 const PerlinNoise = function() {
   this.p = new Array(512);
   this.permutation = new Array(256);
-  this.p_perm = new Array(256);
 
   for (let i = 0; i < 256; i++) {
     this.permutation[i] = i;
@@ -22,21 +19,17 @@ const PerlinNoise = function() {
   for (let i = 0; i < 512; i++) {
     this.p[i] = this.permutation[i % 256];
   }
-
-  for (let i = 0; i < 256; i++) {
-    this.p_perm[i] = this.p[i];
-  }
 };
 
 PerlinNoise.prototype = {
-  grad: function(hash, x, y, z) {
+  grad(hash, x, y, z) {
     const h = hash & 15;
     const u = h < 8 ? x : y;
     const v = h < 4 ? y : h === 12 || h === 14 ? x : z;
     return ((h & 1) === 0 ? u : -u) + ((h & 2) === 0 ? v : -v);
   },
 
-  noise: function(x, y, z) {
+  noise(x, y, z) {
     const X = Math.floor(x) & 255;
     const Y = Math.floor(y) & 255;
     const Z = Math.floor(z) & 255;
@@ -49,32 +42,32 @@ PerlinNoise.prototype = {
     const v = y * y * (3 - 2 * y);
     const w = z * z * (3 - 2 * z);
 
-    const A = this.p_perm[X] + Y;
-    const AA = this.p_perm[A] + Z;
-    const AB = this.p_perm[A + 1] + Z;
-    const B = this.p_perm[X + 1] + Y;
-    const BA = this.p_perm[B] + Z;
-    const BB = this.p_perm[B + 1] + Z;
+    const A = this.p[X] + Y;
+    const AA = this.p[A] + Z;
+    const AB = this.p[A + 1] + Z;
+    const B = this.p[X + 1] + Y;
+    const BA = this.p[B] + Z;
+    const BB = this.p[B + 1] + Z;
 
-    return this.lerp(w,
-      this.lerp(v,
-        this.lerp(u, this.grad(this.p_perm[AA], x, y, z),
-          this.grad(this.p_perm[BA], x - 1, y, z)),
-        this.lerp(u, this.grad(this.p_perm[AB], x, y - 1, z),
-          this.grad(this.p_perm[BB], x - 1, y - 1, z))),
-      this.lerp(v,
-        this.lerp(u, this.grad(this.p_perm[AA + 1], x, y, z - 1),
-          this.grad(this.p_perm[BA + 1], x - 1, y, z - 1)),
-        this.lerp(u, this.grad(this.p_perm[AB + 1], x, y - 1, z - 1),
-          this.grad(this.p_perm[BB + 1], x - 1, y - 1, z - 1))));
+    return this.lerp(
+      w,
+      this.lerp(
+        v,
+        this.lerp(u, this.grad(this.p[AA], x, y, z), this.grad(this.p[BA], x - 1, y, z)),
+        this.lerp(u, this.grad(this.p[AB], x, y - 1, z), this.grad(this.p[BB], x - 1, y - 1, z))
+      ),
+      this.lerp(
+        v,
+        this.lerp(u, this.grad(this.p[AA + 1], x, y, z - 1), this.grad(this.p[BA + 1], x - 1, y, z - 1)),
+        this.lerp(u, this.grad(this.p[AB + 1], x, y - 1, z - 1), this.grad(this.p[BB + 1], x - 1, y - 1, z - 1))
+      )
+    );
   },
 
-  lerp: function(t, a, b) {
+  lerp(t, a, b) {
     return a + t * (b - a);
   }
 };
-// --- End Perlin Noise Implementation ---
-
 
 const NetworkAnimation = () => {
   const canvasRef = useRef(null);
@@ -83,42 +76,45 @@ const NetworkAnimation = () => {
   const nodesRef = useRef([]);
   const perlin = useRef(new PerlinNoise());
 
-
-  // Configuración de la animación
   const config = {
-    nodeCount: 200, 
-    maxDistance: 150,
-    nodeSize: 3,
-    speed: 0.005,
-    mouseInfluence: 350, 
-    mouseRepulsionForce: 0.02, 
-    mouseZInfluence: 0.3, 
-    depthRange: 600, 
-    fov: 400, 
-    tunnelSpeed: 2.0, 
-    
-    // Configuraciones de sombra individual
-    shadowBaseOffsetY: 30,
-    shadowDepthOffsetYScale: 0.5,
-    shadowNearBlur: 2,
-    shadowFarBlur: 20,
-    shadowNearOpacity: 0.6,
-    shadowFarOpacity: 0.1,
+    nodeCount: 100,
+    maxDistance: 120,
+    nodeSize: 2.5,
+    speed: 0.004,
+    mouseInfluence: 300,
+    mouseRepulsionForce: 0.015,
+    mouseZInfluence: 0.2,
+    depthRange: 600,
+    fov: 400,
+    tunnelSpeed: 1.5,
+
+    shadowBaseOffsetY: 15,
+    shadowDepthOffsetYScale: 0.3,
+    shadowNearBlur: 1,
+    shadowFarBlur: 8,
+    shadowNearOpacity: 0.4,
+    shadowFarOpacity: 0.05,
 
     colors: {
-      background: '#0a0a0a', // Color de fondo del canvas
-      nodes: [ // Colores para las partículas
-        '#8B5CF6', '#A855F7', '#C084FC', '#DDD6FE', 
-        '#E879F9', '#F0ABFC', '#7C3AED', '#9333EA', 
-        '#FF69B4', '#EE82EE' 
+      background: '#0a0a0a',
+      nodes: [
+        '#8B5CF6',
+        '#A855F7',
+        '#C084FC',
+        '#DDD6FE',
+        '#E879F9',
+        '#F0ABFC',
+        '#7C3AED',
+        '#9333EA',
+        '#FF69B4',
+        '#EE82EE'
       ],
       connections: {
-        base: 'rgba(124, 22, 128, 0.1)', // Color base de las conexiones
+        base: 'rgba(124, 22, 128, 0.07)'
       }
     }
   };
 
-  // Clase para cada nodo (partícula)
   class Node {
     constructor(canvas, perlinNoiseInstance) {
       this.canvas = canvas;
@@ -133,10 +129,9 @@ const NetworkAnimation = () => {
     }
 
     reset() {
-      // Posición inicial aleatoria para las partículas
       this.x = Math.random() * this.canvas.width;
       this.y = Math.random() * this.canvas.height;
-      this.z = Math.random() * config.fov * 2 - config.fov / 2; 
+      this.z = Math.random() * config.fov * 2 - config.fov / 2;
 
       this.vx = (Math.random() - 0.5) * config.speed * 20;
       this.vy = (Math.random() - 0.5) * config.speed * 20;
@@ -148,10 +143,9 @@ const NetworkAnimation = () => {
 
       this.x += noiseX * 0.5 + this.vx;
       this.y += noiseY * 0.5 + this.vy;
-      
-      this.z -= config.tunnelSpeed; // Movimiento frontal constante (efecto túnel)
 
-      // Influencia del mouse si está activo
+      this.z -= config.tunnelSpeed;
+
       if (mouseRef.current.isHovering) {
         const projectedScale = config.fov / (config.fov + this.z);
         const projectedX = this.x * projectedScale;
@@ -162,24 +156,29 @@ const NetworkAnimation = () => {
         const distance = Math.sqrt(dx * dx + dy * dy);
 
         if (distance < config.mouseInfluence) {
-          const force = (config.mouseInfluence - distance) / config.mouseInfluence; 
+          const force = (config.mouseInfluence - distance) / config.mouseInfluence;
           this.vx -= dx * force * config.mouseRepulsionForce;
           this.vy -= dy * force * config.mouseRepulsionForce;
-          this.z += (Math.random() - 0.5) * force * config.mouseZInfluence; 
+          this.z += (Math.random() - 0.5) * force * config.mouseZInfluence;
         }
       }
 
-      this.vx *= 0.98; // Fricción
+      this.vx *= 0.98;
       this.vy *= 0.98;
 
       const projectedScale = config.fov / (config.fov + this.z);
       const projectedX = this.x * projectedScale;
       const projectedY = this.y * projectedScale;
 
-      // Reiniciar nodo si sale de la vista
-      if (this.z < -config.fov || projectedX < -50 || projectedX > this.canvas.width + 50 || projectedY < -50 || projectedY > this.canvas.height + 50) {
+      if (
+        this.z < -config.fov ||
+        projectedX < -50 ||
+        projectedX > this.canvas.width + 50 ||
+        projectedY < -50 ||
+        projectedY > this.canvas.height + 50
+      ) {
         this.reset();
-        this.z = config.depthRange; 
+        this.z = config.depthRange;
       }
     }
 
@@ -189,22 +188,20 @@ const NetworkAnimation = () => {
       const y = this.y * projectedScale;
       const size = config.nodeSize * projectedScale;
 
-      if (size < 0.5) return; 
+      if (size < 0.5) return;
 
-      // Efecto de pulsación y oscilación de forma
       const pulse = Math.sin(time * 0.002 + this.pulsePhase) * 0.3 + 0.7;
       const finalSize = size * pulse;
 
       const shapeOscillation = Math.sin(time * 0.001 + this.shapeOscillationPhase) * 0.3 + 1;
       const rotation = Math.sin(time * 0.0005 + this.shapeOscillationPhase) * Math.PI / 8;
 
-      // --- Dibujar Sombra ---
       ctx.save();
       ctx.translate(x, y);
       ctx.rotate(rotation);
 
       const normalizedZ = (this.z + config.depthRange / 2) / config.depthRange;
-      
+
       const shadowBlur = config.shadowNearBlur + (config.shadowFarBlur - config.shadowNearBlur) * normalizedZ;
       const shadowOpacity = config.shadowNearOpacity + (config.shadowFarOpacity - config.shadowNearOpacity) * normalizedZ;
 
@@ -215,92 +212,71 @@ const NetworkAnimation = () => {
 
       ctx.shadowColor = shadowColor;
       ctx.shadowBlur = shadowBlur;
-      ctx.shadowOffsetX = config.shadowBaseOffsetY * (this.z / (config.depthRange / 2)) * 0.2;
-      ctx.shadowOffsetY = config.shadowBaseOffsetY + (config.shadowBaseOffsetY * config.shadowDepthOffsetYScale * normalizedZ); 
+      ctx.shadowOffsetX = config.shadowBaseOffsetY * (this.z / (config.depthRange / 2)) * config.shadowDepthOffsetYScale;
+      ctx.shadowOffsetY = config.shadowBaseOffsetY;
 
-      ctx.beginPath();
-      ctx.ellipse(0, 0, finalSize * shapeOscillation, finalSize / shapeOscillation, 0, 0, Math.PI * 2);
       ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.restore();
-
-      // --- Dibujar Glow ---
-      ctx.shadowBlur = 0;
-      ctx.shadowOffsetX = 0;
-      ctx.shadowOffsetY = 0;
-
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, finalSize * 3);
-      gradient.addColorStop(0, this.color);
-      gradient.addColorStop(0.5, this.color + '80'); 
-      gradient.addColorStop(1, this.color + '00'); 
 
       ctx.beginPath();
-      ctx.arc(x, y, finalSize * 3, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
+      const sides = 3 + Math.floor(shapeOscillation * 2);
+      for (let i = 0; i < sides; i++) {
+        const angle = ((i / sides) * 2 * Math.PI);
+        const px = Math.cos(angle) * finalSize;
+        const py = Math.sin(angle) * finalSize;
+        if (i === 0) ctx.moveTo(px, py);
+        else ctx.lineTo(px, py);
+      }
+      ctx.closePath();
       ctx.fill();
 
-      // --- Dibujar Nodo Sólido ---
-      ctx.save();
-      ctx.translate(x, y);
-      ctx.rotate(rotation);
-      ctx.beginPath();
-      ctx.ellipse(0, 0, finalSize * shapeOscillation, finalSize / shapeOscillation, 0, 0, Math.PI * 2);
-      ctx.fillStyle = this.color;
-      ctx.fill();
       ctx.restore();
     }
   }
 
-  // Inicializar canvas y nodos
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
 
-    const resizeCanvas = () => {
-      const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = rect.height;
+    function resize() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+    }
 
-      nodesRef.current = [];
-      for (let i = 0; i < config.nodeCount; i++) {
-        nodesRef.current.push(new Node(canvas, perlin.current));
-      }
-    };
+    resize();
 
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    // Crear nodos
+    nodesRef.current = [];
+    for (let i = 0; i < config.nodeCount; i++) {
+      nodesRef.current.push(new Node(canvas, perlin.current));
+    }
 
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-    };
-  }, []);
+    let lastTime = performance.now();
 
-  // Bucle de animación
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    function animate(time) {
+      animationRef.current = requestAnimationFrame(animate);
 
-    const animate = (time = 0) => {
-      // Limpiar el canvas
+      const delta = time - lastTime;
+      lastTime = time;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Fondo
       ctx.fillStyle = config.colors.background;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Ordenar nodos por Z para una perspectiva correcta
-      nodesRef.current.sort((a, b) => a.z - b.z);
+      // Actualizar y dibujar nodos
+      nodesRef.current.forEach(node => node.update(time));
+      nodesRef.current.forEach(node => node.draw(ctx, time));
 
-      // Actualizar y dibujar cada nodo
-      nodesRef.current.forEach(node => {
-        node.update(time);
-        node.draw(ctx, time);
-      });
-
-      // Dibujar conexiones entre nodos cercanos
+      // Dibujar conexiones limitando a 5 conexiones por nodo
       for (let i = 0; i < nodesRef.current.length; i++) {
+        let connectionsCount = 0;
         for (let j = i + 1; j < nodesRef.current.length; j++) {
+          if (connectionsCount >= 5) break;
+
           const nodeA = nodesRef.current[i];
           const nodeB = nodesRef.current[j];
 
-          // Proyectar nodos 3D a 2D
           const projectedA = {
             x: nodeA.x * (config.fov / (config.fov + nodeA.z)),
             y: nodeA.y * (config.fov / (config.fov + nodeA.z))
@@ -314,87 +290,65 @@ const NetworkAnimation = () => {
           const dy = projectedA.y - projectedB.y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          // Dibujar conexión si están lo suficientemente cerca en 2D
           if (distance < config.maxDistance) {
-            // Calcular opacidad basada en la profundidad (z) y la distancia en 2D
+            connectionsCount++;
+
             const opacityZ = 1 - Math.abs(nodeA.z + nodeB.z) / (2 * config.depthRange);
-            const opacity2D = (1 - (distance / config.maxDistance));
-            const finalOpacity = Math.min(opacityZ, opacity2D) * 0.6; // Multiplicador para hacerlas más sutiles
+            const opacity2D = 1 - distance / config.maxDistance;
+            const finalOpacity = Math.min(opacityZ, opacity2D) * 0.4;
 
             ctx.beginPath();
             ctx.moveTo(projectedA.x, projectedA.y);
             ctx.lineTo(projectedB.x, projectedB.y);
-
-            // Siempre se usa el color base y opacidad calculada, sin cambio al hover
-            ctx.strokeStyle = config.colors.connections.base.replace('0.1', (finalOpacity * 0.5).toString());
+            ctx.strokeStyle = `rgba(124, 22, 128, ${finalOpacity.toFixed(3)})`;
             ctx.lineWidth = 1;
-            
             ctx.stroke();
           }
         }
       }
+    }
 
-      animationRef.current = requestAnimationFrame(animate);
-    };
+    animationRef.current = requestAnimationFrame(animate);
 
-    animate();
+    window.addEventListener('resize', resize);
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current);
-      }
+      cancelAnimationFrame(animationRef.current);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
-  // Eventos del mouse
-  const handleMouseMove = (e) => {
+  useEffect(() => {
     const canvas = canvasRef.current;
-    const rect = canvas.getBoundingClientRect();
-    // Ajusta la posición del mouse relativa al canvas
-    mouseRef.current.x = e.clientX - rect.left;
-    mouseRef.current.y = e.clientY - rect.top;
-  };
 
-  const handleMouseEnter = () => {
-    mouseRef.current.isHovering = true;
-  };
+    function onMouseMove(e) {
+      const rect = canvas.getBoundingClientRect();
+      mouseRef.current.x = e.clientX - rect.left;
+      mouseRef.current.y = e.clientY - rect.top;
+    }
+    function onMouseEnter() {
+      mouseRef.current.isHovering = true;
+    }
+    function onMouseLeave() {
+      mouseRef.current.isHovering = false;
+    }
 
-  const handleMouseLeave = () => {
-    mouseRef.current.isHovering = false;
-  };
+    canvas.addEventListener('mousemove', onMouseMove);
+    canvas.addEventListener('mouseenter', onMouseEnter);
+    canvas.addEventListener('mouseleave', onMouseLeave);
+
+    return () => {
+      canvas.removeEventListener('mousemove', onMouseMove);
+      canvas.removeEventListener('mouseenter', onMouseEnter);
+      canvas.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }, []);
 
   return (
-    <div className="network-animation">
-      <canvas
-        ref={canvasRef}
-        onMouseMove={handleMouseMove}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: 1, // Asegura que esté en la capa de fondo (pero visible)
-          pointerEvents: 'auto' // ¡Este canvas SÍ debe capturar eventos del mouse!
-        }}
-      />
-
-      {/* Estilos CSS específicos para este componente (scoped CSS-in-JS con styled-jsx) */}
-      <style jsx>{`
-        .network-animation {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          overflow: hidden;
-          z-index: 1; /* También en la capa de fondo */
-          pointer-events: none; /* Permite que los eventos del mouse pasen a través de este div contenedor */
-        }
-      `}</style>
-    </div>
+    <canvas
+      ref={canvasRef}
+      style={{ width: '100%', height: '100%', display: 'block', background: config.colors.background }}
+    />
   );
 };
 

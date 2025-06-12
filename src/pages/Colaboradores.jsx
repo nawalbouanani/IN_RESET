@@ -79,14 +79,14 @@ const Colaboradores = () => {
   ];
 
   return (
-    <section className="py-5">
+    <section id="contacto" className="py-5">
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12">
             {/* Header */}
-            <div className="text-center mb-5">
+            <div className="text-center mt-5 mb-5">
               <h2
-                className="display-6 fw-bold mb-3 text-white"
+                className="text-4xl md:text-5xl font-bold mb-3"
                 style={{
                   background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
                   WebkitBackgroundClip: 'text',
