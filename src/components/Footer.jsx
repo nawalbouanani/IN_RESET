@@ -46,10 +46,10 @@ export const Footer = () => {
             <h5 className="fs-6 fw-bold mb-3 text-white">Contacto</h5>
             <ul className="list-unstyled mb-0">
               <li className="mb-2">
-                <a href="mailto:contacto@in-reset.com" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">contacto@in-reset.com</a>
+                <a href="mailto:soporte@in-reset.com" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">soporte@in-reset.com</a>
               </li>
               <li className="mb-2">
-                <a href="mailto:colaboraciones@in-reset.com" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">colaboraciones@in-reset.com</a>
+                <a href="mailto:info@in-reset.com" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">info@in-reset.com</a>
               </li>
             </ul>
           </div>
@@ -60,7 +60,7 @@ export const Footer = () => {
         {/* Sección de Copyright y Redes Sociales */}
         <div className="row justify-content-between align-items-center">
             <div className="col-12 col-md-auto text-center text-md-start">
-                <p className="mb-2 mb-md-0 text-white-50 fs-7">&copy; Copyright {currentYear}</p>
+                <p className="mb-2 mb-md-0 text-white-50 fs-7">&copy; IN RESET {currentYear}</p>
             </div>
             <div className="col-12 col-md-auto text-center text-md-end">
                

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import contactSideImage from "../assets/img/contactSideImage.jpg"; // Asegúrate de que esta imagen esté en tus assets
+import contactSideImage from "../assets/img/contactSideImage.jpg";
 
-// Define el número de WhatsApp de la empresa (formato internacional sin "+")
-const WHATSAPP_NUMBER = '34611891848'; // ¡CAMBIA ESTO POR EL NÚMERO REAL DE TU EMPRESA!
 const ContactModal = ({ show, handleClose }) => {
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
   const [formData, setFormData] = useState({
     nombre: '',
     apellido: '',
@@ -11,6 +11,10 @@ const ContactModal = ({ show, handleClose }) => {
     telefono: '',
     mensaje: '',
     privacidad: false,
+    empresasMarcas: false,
+    inversores: false,
+    patrocinadores: false,
+    coCreacion: false,
   });
 
   const handleChange = (e) => {
@@ -21,266 +25,180 @@ const ContactModal = ({ show, handleClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mldnbvpa";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.privacidad) {
+      setShowSuccessMessage(false);
       alert('Debes aceptar los términos de privacidad para enviar el mensaje.');
       return;
     }
 
-    // Construimos el mensaje de WhatsApp línea por línea y luego lo unimos
-    // Esto asegura que cada línea termine con un salto de línea y se codifique correctamente
-    const messageLines = [
-      '¡Hola! He llenado el formulario de contacto en tu sitio web.',
-      '', // Línea en blanco para separación
-      'Detalles del Contacto:',
-      `Nombre: ${formData.nombre}`,
-      `Apellido: ${formData.apellido}`,
-      `Email: ${formData.email}`,
-      `Teléfono: ${formData.telefono}`,
-      '', // Línea en blanco
-      'Mensaje:',
-      `${formData.mensaje}`
-    ];
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          nombre: formData.nombre,
+          apellido: formData.apellido,
+          email: formData.email,
+          telefono: formData.telefono,
+          mensaje: formData.mensaje,
+          intereses: {
+            empresasMarcas: formData.empresasMarcas,
+            inversores: formData.inversores,
+            patrocinadores: formData.patrocinadores,
+            coCreacion: formData.coCreacion,
+          }
+        }),
+      });
 
-    // Unimos las líneas con '%0A' que es la codificación de un salto de línea en URL
-    const message = messageLines.map(line => encodeURIComponent(line)).join('%0A');
+      if (response.ok) {
+        setShowSuccessMessage(true);
+        setFormData({
+          nombre: '',
+          apellido: '',
+          email: '',
+          telefono: '',
+          mensaje: '',
+          privacidad: false,
+          empresasMarcas: false,
+          inversores: false,
+          patrocinadores: false,
+          coCreacion: false,
+        });
 
-    // Creamos el enlace de WhatsApp
-    const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+        setTimeout(() => {
+          setShowSuccessMessage(false);
+          handleClose();
+        }, 2000);
 
-    // Abrimos el enlace en una nueva pestaña
-    window.open(whatsappLink, '_blank');
-
-    alert('Serás redirigido a WhatsApp con tu mensaje. Por favor, haz clic en "Enviar" allí.');
-
-    // Opcional: Si quieres resetear el formulario después de la redirección
-    setFormData({
-      nombre: '',
-      apellido: '',
-      email: '',
-      telefono: '',
-      mensaje: '',
-      privacidad: false,
-    });
-    handleClose(); // Cierra el modal
+      } else {
+        alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
+      }
+    } catch (error) {
+      console.error('Error al enviar formulario:', error);
+      alert('Error de red. Por favor, intenta nuevamente.');
+    }
   };
 
   useEffect(() => {
-    if (show) {
-      document.body.classList.add('modal-open');
-    } else {
-      document.body.classList.remove('modal-open');
-    }
-    return () => {
-      document.body.classList.remove('modal-open');
-    };
+    document.body.classList.toggle('modal-open', show);
+    if (!show) setShowSuccessMessage(false);
+    return () => document.body.classList.remove('modal-open');
   }, [show]);
 
-  if (!show) {
-    return null;
-  }
+  if (!show) return null;
 
   return (
-    <div className="modal fade show"
-         style={{ display: 'block', paddingRight: '17px', backgroundColor: 'rgba(0,0,0,0.7)' }}
-         tabIndex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true"
-         onClick={handleClose}>
+    <div
+      className="modal fade show"
+      style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.7)' }}
+      onClick={handleClose}
+    >
+      <div
+        className="modal-dialog modal-dialog-centered modal-xl"
+        style={{ maxWidth: '800px', width: '90vw' }}
+        onClick={e => e.stopPropagation()}
+      >
+        <div className="modal-content" style={{ background: 'transparent', border: 'none', borderRadius: '15px' }}>
+          <div
+            className="modal-body p-0"
+            style={{
+              background: '#141414',
+              borderRadius: '15px',
+              border: '1px solid rgba(168, 85, 247, 0.4)',
+              boxShadow: '0 6px 20px rgba(0, 0, 0, 0.5)',
+            }}
+          >
+            {showSuccessMessage && (
+              <div className="position-absolute w-100 h-100 d-flex align-items-center justify-content-center"
+                style={{ background: 'rgba(20, 20, 20, 0.95)', zIndex: 20, borderRadius: '15px' }}
+              >
+                <div className="text-center">
+                  <div style={{ fontSize: '3rem', color: '#a855f7', marginBottom: '1rem' }}>✓</div>
+                  <h3 className="text-white mb-2" style={successTitleStyle}>¡Gracias!</h3>
+                  <p className="text-white" style={{ opacity: '0.9' }}>Tu mensaje ha sido enviado correctamente</p>
+                </div>
+              </div>
+            )}
 
-      <div className="modal-dialog modal-dialog-centered modal-lg" role="document"
-           onClick={e => e.stopPropagation()}
-           style={{ maxWidth: '750px' }}>
-        <div className="modal-content"
-             style={{
-               background: 'transparent',
-               border: 'none',
-               borderRadius: '15px',
-               overflow: 'hidden',
-             }}>
-          <div className="modal-body p-0"
-               style={{
-                 background: '#141414',
-                 borderRadius: '15px',
-                 border: '1px solid rgba(168, 85, 247, 0.4)',
-                 boxShadow: '0 6px 20px rgba(0, 0, 0, 0.5)',
-               }}>
-            <button type="button" className="btn-close" aria-label="Close"
-                    onClick={handleClose}
-                    style={{
-                        position: 'absolute',
-                        top: '15px',
-                        right: '15px',
-                        zIndex: 10,
-                        filter: 'invert(1) grayscale(1) brightness(2)',
-                        backgroundColor: 'transparent',
-                        border: 'none',
-                        fontSize: '1.5rem',
-                        opacity: 1,
-                    }}
+            <button
+              type="button"
+              className="btn-close"
+              onClick={handleClose}
+              style={closeButtonStyle}
             ></button>
 
-            <div className="row g-0 align-items-stretch">
+            <div className="row g-0 align-items-stretch" style={{ height: '520px' }}>
               <div className="col-12 col-lg-6 d-flex">
-                <div className="p-3 w-100 d-flex flex-column justify-content-center">
-                  <h2 className="text-white text-center font-bold mb-1"
-                      style={{
-                        fontSize: '1.5rem',
-                        background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        backgroundClip: 'text',
-                      }}>
-                    ¿Listos para crear el próximo proyecto disruptivo?
-                  </h2>
-                  <p className="text-white text-center mb-3" style={{ opacity: '1', fontSize: '0.8rem' }}>
-                    Únete a la revolución de convertir desafíos femeninos en oportunidades.
-                  </p>
-
-                  <form onSubmit={handleSubmit}>
-                    <div className="row g-2 mb-2">
-                      <div className="col-md-6">
-                        <label htmlFor="nombre" className="form-label" style={labelStyle}>Nombre</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="nombre"
-                          name="nombre"
-                          placeholder="Nombre"
-                          value={formData.nombre}
-                          onChange={handleChange}
-                          required
-                          style={formControlStyleInputs} /* Usamos el estilo para inputs con fondo blanco */
-                        />
+                <div className="p-3 w-100 d-flex flex-column" >
+                  <div>
+                    <h2 className="text-white text-start font-bold mb-4" style={titleStyle}>Contáctanos</h2>
+                  </div>
+                  <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
+                    <div className="row g-2">
+                      <div className="col-6">
+                        <label htmlFor="nombre" className="form-label mb-2" style={labelStyle}>Nombre</label>
+                        <input type="text" id="nombre" name="nombre" value={formData.nombre} onChange={handleChange} required className="form-control" style={formControlStyleInputs} />
                       </div>
-                      <div className="col-md-6">
-                        <label htmlFor="apellido" className="form-label" style={labelStyle}>Apellido</label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="apellido"
-                          name="apellido"
-                          placeholder="Apellido"
-                          value={formData.apellido}
-                          onChange={handleChange}
-                          required
-                          style={formControlStyleInputs} /* Usamos el estilo para inputs con fondo blanco */
-                        />
+                      <div className="col-6">
+                        <label htmlFor="apellido" className="form-label mb-2" style={labelStyle}>Apellido</label>
+                        <input type="text" id="apellido" name="apellido" value={formData.apellido} onChange={handleChange} required className="form-control" style={formControlStyleInputs} />
                       </div>
                     </div>
 
-                    <div className="mb-2">
-                      <label htmlFor="email" className="form-label" style={labelStyle}>Email</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        placeholder="you@company.com"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        style={formControlStyleInputs} /* Usamos el estilo para inputs con fondo blanco */
-                      />
+                    <div className="row g-2">
+                      <div className="col-6">
+                        <label htmlFor="email" className="form-label mb-2" style={labelStyle}>Email</label>
+                        <input type="email" id="email" name="email" value={formData.email} onChange={handleChange} required className="form-control" style={formControlStyleInputs} />
+                      </div>
+                      <div className="col-6">
+                        <label htmlFor="telefono" className="form-label mb-2" style={labelStyle}>Teléfono</label>
+                        <input type="tel" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} className="form-control" style={formControlStyleInputs} />
+                      </div>
                     </div>
 
-                    <div className="mb-2">
-                      <label htmlFor="telefono" className="form-label" style={labelStyle}>Teléfono</label>
-                      <input
-                        type="tel"
-                        className="form-control"
-                        id="telefono"
-                        name="telefono"
-                        placeholder="ES +34 (555) 000-000"
-                        value={formData.telefono}
-                        onChange={handleChange}
-                        style={formControlStyleInputs} /* Usamos el estilo para inputs con fondo blanco */
-                      />
+                    <div>
+                      <label htmlFor="mensaje" className="form-label mb-2" style={labelStyle}>Mensaje</label>
+                      <textarea id="mensaje" name="mensaje" rows="2" value={formData.mensaje} onChange={handleChange} required className="form-control" style={formControlStyleInputs}></textarea>
                     </div>
 
-                    <div className="mb-3">
-                      <label htmlFor="mensaje" className="form-label" style={labelStyle}>Mensaje</label>
-                      <textarea
-                        className="form-control"
-                        id="mensaje"
-                        name="mensaje"
-                        rows="2"
-                        placeholder="Tu mensaje aquí..."
-                        value={formData.mensaje}
-                        onChange={handleChange}
-                        required
-                        style={formControlStyleInputs} /* Usamos el estilo para inputs con fondo blanco */
-                      ></textarea>
+                    <div className="row g-1">
+                      {[
+                        ['empresasMarcas', 'Empresas & Marcas'],
+                        ['inversores', 'Inversores'],
+                        ['patrocinadores', 'Patrocinadores'],
+                        ['coCreacion', 'Co-creación']
+                      ].map(([key, label]) => (
+                        <div className="col-6" key={key}>
+                          <div className="form-check">
+                            <input type="checkbox" id={key} name={key} checked={formData[key]} onChange={handleChange} className="form-check-input" style={checkboxStyle(formData[key])} />
+                            <label htmlFor={key} className="form-check-label mb-2" style={{ ...labelStyle, fontSize: '0.7rem' }}>{label}</label>
+                          </div>
+                        </div>
+                      ))}
                     </div>
 
-                    <div className="form-check mb-3">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        id="privacidad"
-                        name="privacidad"
-                        checked={formData.privacidad}
-                        onChange={handleChange}
-                        required
-                        style={checkboxStyle(formData.privacidad)}
-                      />
-                      <label className="form-check-label" htmlFor="privacidad" style={labelStyle}>
-                        Acepto los términos de privacidad
-                      </label>
+                    <div className="form-check mb-2">
+                      <input type="checkbox" id="privacidad" name="privacidad" checked={formData.privacidad} onChange={handleChange} required className="form-check-input" style={checkboxStyle(formData.privacidad)} />
+                      <label htmlFor="privacidad" className="form-check-label  mb-5" style={{ ...labelStyle, fontSize: '0.75rem' }}>Acepto los términos de privacidad</label>
                     </div>
 
-                    <button
-                      type="submit"
-                      className="btn w-100 text-white fw-semibold px-3 py-1"
-                      style={{
-                        background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                        border: 'none',
-                        borderRadius: '20px',
-                        boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)',
-                        transition: 'all 0.3s ease',
-                        fontSize: '0.85rem'
-                      }}
-                      onMouseOver={(e) => {
-                        e.target.style.transform = 'translateY(-1px)';
-                        e.target.style.boxShadow = '0 5px 15px rgba(168, 85, 247, 0.4)';
-                      }}
-                      onMouseOut={(e) => {
-                        e.target.style.transform = 'translateY(0)';
-                        e.target.style.boxShadow = '0 4px 12px rgba(168, 85, 247, 0.3)';
-                      }}>
-                      Enviar mensaje
-                    </button>
+                    <button type="submit" className="btn w-100 text-white fw-semibold px-3 py-2" style={submitButtonStyle}>Enviar mensaje</button>
                   </form>
                 </div>
               </div>
 
               <div className="col-12 col-lg-6 d-none d-lg-flex align-items-center justify-content-center p-0">
-                <div
-                  className="w-100 h-100 position-relative overflow-hidden"
-                  style={{
-                    borderRadius: '12px',
-                    border: '1px solid rgba(6, 182, 212, 0.3)',
-                    boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
-                  }}
-                >
-                  <img
-                    src={contactSideImage}
-                    alt="Mujer haciendo yoga"
-                    className="img-fluid w-100 h-100"
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      borderRadius: '12px',
-                      filter: 'brightness(0.9) contrast(1.1) saturate(1.2)',
-                    }}
-                  />
-                   <div
-                    className="position-absolute w-100 h-100 top-0 left-0"
-                    style={{
-                      background: 'rgba(0, 0, 0, 0.4)',
-                      borderRadius: '12px',
-                      opacity: 1,
-                    }}
-                  ></div>
+                <div className="w-100 h-100 position-relative overflow-hidden" style={imageWrapperStyle}>
+                  <img src={contactSideImage} alt="Mujer haciendo yoga" className="img-fluid w-100 h-100" style={imageStyle} />
+                  <div className="position-absolute w-100 h-100 top-0 left-0" style={imageOverlayStyle}></div>
                 </div>
               </div>
             </div>
@@ -291,50 +209,86 @@ const ContactModal = ({ show, handleClose }) => {
   );
 };
 
+const labelStyle = {
+  color: '#e0e0e0',
+  fontSize: '0.75rem',
+  marginBottom: '0.2rem',
+};
+
 const formControlStyleInputs = {
   backgroundColor: '#ffffff',
   border: '1px solid #ccc',
   color: '#333',
   borderRadius: '5px',
-  padding: '0.4rem 0.7rem',
-  fontSize: '0.8rem',
-  boxShadow: 'none',
-  transition: 'all 0.3s ease',
-  textAlign: 'left',
-  '::placeholder': {
-    color: '#666',
-    textAlign: 'left',
-  },
+  padding: '0.4rem 0.6rem',
+  fontSize: '0.75rem',
 };
 
-const labelStyle = {
-  color: '#e0e0e0',
-  textAlign: 'left',
-  marginBottom: '0.1rem',
-  fontSize: '0.8rem',
-  display: 'block'
-};
-
-const checkboxStyle = (isChecked) => ({
-  backgroundColor: isChecked ? 'rgba(168, 85, 247, 1)' : '#ffffff',
-  border: isChecked ? '1px solid #a855f7' : '1px solid #ccc',
-  borderRadius: '2px',
+const checkboxStyle = (checked) => ({
+  backgroundColor: checked ? '#a855f7' : '#fff',
+  border: checked ? '1px solid #a855f7' : '1px solid #ccc',
+  width: '0.8rem',
+  height: '0.8rem',
   appearance: 'none',
-  width: '0.85rem',
-  height: '0.85rem',
-  cursor: 'pointer',
-  display: 'inline-block',
-  verticalAlign: 'middle',
-  position: 'relative',
-  transition: 'background-color 0.2s ease, border-color 0.2s ease',
-
-  backgroundImage: isChecked
+  borderRadius: '2px',
+  backgroundImage: checked
     ? `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10l3 3l6-6'/%3e%3c/svg%3e")`
     : 'none',
-  backgroundSize: '100% 100%',
   backgroundPosition: 'center',
   backgroundRepeat: 'no-repeat',
+  backgroundSize: '100% 100%',
 });
 
+const closeButtonStyle = {
+  position: 'absolute',
+  top: '15px',
+  right: '15px',
+  filter: 'invert(1) grayscale(1) brightness(2)',
+  backgroundColor: 'transparent',
+  border: 'none',
+  zIndex: 10,
+};
+
+const submitButtonStyle = {
+  background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
+  border: 'none',
+  borderRadius: '20px',
+  boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)',
+  transition: 'all 0.3s ease',
+  fontSize: '0.85rem'
+};
+
+const titleStyle = {
+  fontSize: '1.1rem',
+  background: ' #c1aaee',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+};
+
+const successTitleStyle = {
+  background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  backgroundClip: 'text',
+};
+
+const imageWrapperStyle = {
+  borderRadius: '12px',
+  border: '1px solid rgba(6, 182, 212, 0.3)',
+  boxShadow: '0 5px 15px rgba(0, 0, 0, 0.2)',
+};
+
+const imageStyle = {
+  objectFit: 'cover',
+  objectPosition: 'center',
+  borderRadius: '12px',
+  filter: 'brightness(0.9) contrast(1.1) saturate(1.2)',
+};
+
+const imageOverlayStyle = {
+  background: 'rgba(0, 0, 0, 0.4)',
+  borderRadius: '12px',
+};
 
 export default ContactModal;

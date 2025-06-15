@@ -1,4 +1,5 @@
 import React from 'react';
+import moradito from "../assets/img/moradito.png";
 
 const About = () => {
   return (
@@ -6,34 +7,41 @@ const About = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
-            {/* Header */}
+            {/* Header con imagen en lugar de texto */}
             <div className="text-center mb-5">
-              <h2
-                className="display-4 fw-bold mb-3 mt-4 text-white"
-                style={{
-                  background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                IN RESET
-              </h2>
-              <div
-                className="mx-auto"
-                style={{
-                  width: '80px',
-                  height: '4px',
-                  background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                  borderRadius: '2px'
-                }}
-              ></div>
+              <img
+                src={moradito} // <-- Cambia esto por la ruta real de tu logo
+                alt="IN RESET Logo"
+                className="img-fluid mb-3 mt-4"
+                style={{ maxHeight: '80px' }} // <-- Ajusta la altura del logo según tu diseño
+              />
             </div>
 
             {/* Content - Cards de Misión y Qué Somos */}
             {/* AÑADIDO: d-flex y align-items-stretch al row para igualar alturas */}
             <div className="row align-items-center d-flex align-items-stretch">
-              <div className="col-12 col-md-6 mb-4 mb-md-0">
+              <div className="col-12 col-md-6 mb-3 mb-md-0"> {/* AÑADIDO: mb-3 mb-md-0 para espaciado en mobile */}
+                <div
+                  className="p-4 h-100 d-flex flex-column" /* AÑADIDO: d-flex flex-column */
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))',
+                    borderRadius: '15px',
+                    border: '1px solid rgba(6, 182, 212, 0.2)',
+                    boxShadow: '0 8px 32px rgba(6, 182, 212, 0.1)'
+                  }}
+                >
+                  <h3 className="h4 text-white mb-3 fw-bold">
+                    Quiénes Somos
+                  </h3>
+                  <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 */}
+                    Somos una plataforma
+                    <span className="text-white fw-semibold"> EdTech-HealthTech </span>
+                    que impulsa proyectos con impacto social y económico,
+                    <span className="text-white fw-semibold"> diseñados por y para mujeres</span>.
+                  </p>
+                </div>
+              </div>
+              <div className="col-12 col-md-6"> {/* REMOVIDO: mb-4 mb-md-0 ya que era redundante */}
                 <div
                   className="p-4 h-100 d-flex flex-column" /* AÑADIDO: d-flex flex-column para que el contenido se estire dentro de la card */
                   style={{
@@ -55,121 +63,41 @@ const About = () => {
                 </div>
               </div>
 
-              <div className="col-12 col-md-6">
-                <div
-                  className="p-4 h-100 d-flex flex-column" /* AÑADIDO: d-flex flex-column */
-                  style={{
-                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))',
-                    borderRadius: '15px',
-                    border: '1px solid rgba(6, 182, 212, 0.2)',
-                    boxShadow: '0 8px 32px rgba(6, 182, 212, 0.1)'
-                  }}
-                >
-                  <h3 className="h4 text-white mb-3 fw-bold">
-                    Qué Somos
-                  </h3>
-                  <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 */}
-                    Somos una plataforma
-                    <span className="text-white fw-semibold"> EdTech-HealthTech </span>
-                    que impulsa proyectos con impacto social y económico,
-                    <span className="text-white fw-semibold"> diseñados por y para mujeres</span>.
-                  </p>
-                </div>
-              </div>
+
             </div>
 
             {/* Features */}
             <div className="row mt-5">
               <div className="col-12">
                 <div className="row g-4">
-                  <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="text-center">
-                      <div
-                        className="d-inline-flex align-items-center justify-content-center mb-3"
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                          borderRadius: '50%',
-                          boxShadow: '0 4px 20px rgba(168, 85, 247, 0.3)'
-                        }}
-                      >
-                        <span className="text-white fw-bold fs-4">🎓</span>
-                      </div>
-                      <h5 className="text-white mb-2">EdTech</h5>
-                      <p className="text-white-50 small mb-0">
-                        Educación tecnológica innovadora
-                      </p>
-                    </div>
+                  <div className="col-12 col-sm-6 col-lg-3 text-center">
+                    <i className="fas fa-graduation-cap text-white fs-2 mb-3"></i>
+                    <h5 className="text-white mb-2">EdTech</h5>
+                    <p className="text-white-50 small mb-0">Educación tecnológica innovadora</p>
                   </div>
 
-                  <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="text-center">
-                      <div
-                        className="d-inline-flex align-items-center justify-content-center mb-3"
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                          borderRadius: '50%',
-                          boxShadow: '0 4px 20px rgba(6, 182, 212, 0.3)'
-                        }}
-                      >
-                        <span className="text-white fw-bold fs-4">💊</span>
-                      </div>
-                      <h5 className="text-white mb-2">HealthTech</h5>
-                      <p className="text-white-50 small mb-0">
-                        Soluciones de salud digital
-                      </p>
-                    </div>
+                  <div className="col-12 col-sm-6 col-lg-3 text-center">
+                    <i className="fas fa-capsules text-white fs-2 mb-3"></i>
+                    <h5 className="text-white mb-2">HealthTech</h5>
+                    <p className="text-white-50 small mb-0">Soluciones de salud digital</p>
                   </div>
 
-                  <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="text-center">
-                      <div
-                        className="d-inline-flex align-items-center justify-content-center mb-3"
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                          borderRadius: '50%',
-                          boxShadow: '0 4px 20px rgba(168, 85, 247, 0.3)'
-                        }}
-                      >
-                        <span className="text-white fw-bold fs-4">🚀</span>
-                      </div>
-                      <h5 className="text-white mb-2">Impacto</h5>
-                      <p className="text-white-50 small mb-0">
-                        Proyectos con impacto real
-                      </p>
-                    </div>
+                  <div className="col-12 col-sm-6 col-lg-3 text-center">
+                    <i className="fas fa-rocket text-white fs-2 mb-3"></i>
+                    <h5 className="text-white mb-2">Impacto</h5>
+                    <p className="text-white-50 small mb-0">Proyectos con impacto real</p>
                   </div>
 
-                  <div className="col-12 col-sm-6 col-lg-3">
-                    <div className="text-center">
-                      <div
-                        className="d-inline-flex align-items-center justify-content-center mb-3"
-                        style={{
-                          width: '50px',
-                          height: '50px',
-                          background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                          borderRadius: '50%',
-                          boxShadow: '0 4px 20px rgba(6, 182, 212, 0.3)'
-                        }}
-                      >
-                        <span className="text-white fw-bold fs-4">♀️</span>
-                      </div>
-                      <h5 className="text-white mb-2">Por Mujeres</h5>
-                      <p className="text-white-50 small mb-0">
-                        Diseñado por y para mujeres
-                      </p>
-                    </div>
+                  <div className="col-12 col-sm-6 col-lg-3 text-center">
+                    <i className="far fa-gem text-white fs-2 mb-3"></i>
+                    <h5 className="text-white mb-2">Mujeres</h5>
+                    <p className="text-white-50 small mb-0">Diseñado por y para mujeres</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* CTA */}
+            {/* CTA 
             <div className="text-center mt-5">
               <div
                 className="p-4 rounded-4"
@@ -206,7 +134,7 @@ const About = () => {
                   Comienza tu transformación
                 </button>
               </div>
-            </div>
+            </div>*/}
           </div>
         </div>
       </div>
