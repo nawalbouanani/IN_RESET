@@ -40,20 +40,20 @@ const Hero = () => {
           <div className="row justify-content-center">
             <div className="col-12 col-lg-7 text-center">
               <div className="hero-text-container">
-                <h1 className="hero-title-purple fw-bold mb-0 animate-fade-up fs-hero-title-main">
-                  Convertimos Desafíos
-                </h1>
+                <h2 className="hero-title-purple fw-bold mb-0 animate-fade-up fs-hero-title-main">
+                  Convertimos desafíos
+                </h2>
                 <h1 className="hero-title-purple fw-bold mb-3 animate-fade-up animate-delay-1 fs-hero-title-secondary">
-                  en Oportunidades
+                  en oportunidades
                 </h1>
                 <p className="hero-description-purple mb-4 animate-fade-up animate-delay-2">
-                  Cada etapa de la vida de una mujer presenta desafíos únicos. Nuestra visión? Cada desafío puede transformarse en un proyecto escalable con impacto social y económico.
+                  Juntos, podemos resetear y redefinir el futuro.
                 </p>
-                <div className="animate-fade-up animate-delay-3 mb-5">
-                  <a href="#nosotros" className="btn btn-tech-compact btn-lg px-4 py-2">
-                    Transforma tu historia
-                  </a>
-                </div>
+                {/* <div className="animate-fade-up animate-delay-3 mt-5 mb-5">
+    <a href="#nosotros" className="btn btn-tech-compact btn-lg px-4 py-2">
+        Únete a la revolución
+    </a>
+</div> */}
               </div>
             </div>
           </div>

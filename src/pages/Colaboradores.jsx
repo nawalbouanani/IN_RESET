@@ -6,11 +6,14 @@ import cocreacionImg from "../assets/img/pilar.jpg";
 import ContactModal from './contactModal.jsx';
 
 // Define el número de WhatsApp de la empresa (formato internacional sin "+")
-const WHATSAPP_NUMBER = '34611891848'; // ¡ASEGÚRATE DE CAMBIAR ESTO POR EL NÚMERO REAL DE TU EMPRESA!
+const WHATSAPP_NUMBER = '34691976233';
 
 const Colaboradores = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [showContactModal, setShowContactModal] = useState(false); // Estado para controlar la visibilidad del modal
+  const [showContactModal, setShowContactModal] = useState(false);
+
+  // ⚙️ CONFIGURACIÓN DEL BOTÓN - Cambia esta variable para elegir el comportamiento
+  const SHOW_BUTTON_ALWAYS = true; // true = siempre visible, false = solo en hover
 
   // Función para abrir WhatsApp
   const openWhatsAppChat = (messageText) => {
@@ -26,12 +29,11 @@ const Colaboradores = () => {
   const colaboradoresData = [
     {
       id: 'empresas',
-      icon: '🏢',
       title: 'EMPRESAS & MARCAS',
       subtitle: 'Acceso a audiencias segmentadas',
       description: 'Conecta con nuestra comunidad de mujeres empoderadas y amplifica tu impacto de marca a través de experiencias auténticas y transformadoras.',
       cta: 'Explorar Alianzas',
-      whatsappMessage: '¡Hola! Estoy interesado/a en las Alianzas para Empresas y Marcas. Me gustaría obtener más información.', // Mensaje específico
+      whatsappMessage: '¡Hola! Estoy interesado/a en las Alianzas para Empresas y Marcas. Me gustaría obtener más información.',
       image: linkedinImg,
       gradient: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1))',
       border: 'rgba(168, 85, 247, 0.2)',
@@ -39,12 +41,11 @@ const Colaboradores = () => {
     },
     {
       id: 'inversores',
-      icon: '💰',
       title: 'INVERSORES',
       subtitle: 'Portfolio de impacto exponencial',
       description: 'Invierte en el futuro de la tecnología femenina. Proyectos escalables con impacto social medible y retorno sostenible a largo plazo.',
       cta: 'Ver Oportunidades',
-      whatsappMessage: '¡Hola! Estoy interesado/a en oportunidades de inversión. Me gustaría conocer más sobre los proyectos de IN RESET.', // Mensaje específico
+      whatsappMessage: '¡Hola! Estoy interesado/a en oportunidades de inversión. Me gustaría conocer más sobre los proyectos de IN RESET.',
       image: inversoresImg,
       gradient: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))',
       border: 'rgba(6, 182, 212, 0.2)',
@@ -52,12 +53,11 @@ const Colaboradores = () => {
     },
     {
       id: 'patrocinadores',
-      icon: '🤝',
       title: 'PATROCINADORES',
       subtitle: 'Integración en experiencias',
       description: 'Forma parte de eventos, talleres y programas formativos que transforman vidas. Tu marca asociada al empoderamiento tecnológico femenino.',
       cta: 'Conocer Programas',
-      whatsappMessage: '¡Hola! Estoy interesado/a en los programas de patrocinio de IN RESET. Me gustaría conocer más detalles.', // Mensaje específico
+      whatsappMessage: '¡Hola! Estoy interesado/a en los programas de patrocinio de IN RESET. Me gustaría conocer más detalles.',
       image: patrocinadoresImg,
       gradient: 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(14, 165, 233, 0.1))',
       border: 'rgba(139, 92, 246, 0.2)',
@@ -65,12 +65,11 @@ const Colaboradores = () => {
     },
     {
       id: 'cocreacion',
-      icon: '⚡',
       title: 'CO-CREACIÓN',
       subtitle: 'Desarrollo de proyectos conjuntos',
       description: 'Colabora directamente en el desarrollo de soluciones innovadoras. Desde la ideación hasta la implementación de productos disruptivos.',
       cta: 'Iniciar Proyecto',
-      whatsappMessage: '¡Hola! Estoy interesado/a en iniciar un proyecto de co-creación con IN RESET. Me gustaría discutir mi idea.', // Mensaje específico
+      whatsappMessage: '¡Hola! Estoy interesado/a en iniciar un proyecto de co-creación con IN RESET. Me gustaría discutir mi idea.',
       image: cocreacionImg,
       gradient: 'linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1))',
       border: 'rgba(14, 165, 233, 0.2)',
@@ -88,16 +87,16 @@ const Colaboradores = () => {
               <h2
                 className="text-4xl md:text-5xl font-bold mb-3"
                 style={{
-                  background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
+                  background: ' #c1aaee',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'
                 }}
               >
-                Colabora con Nosotras
+                Colabora con nosotras
               </h2>
               <div
-                className="mx-auto mb-4"
+                className="mx-auto mb-3"
                 style={{
                   width: '100px',
                   height: '4px',
@@ -106,14 +105,12 @@ const Colaboradores = () => {
                 }}
               ></div>
               <p className="text-white-50 fs-5">
-                Construye el Futuro con IN RESET
+                Construye el futuro con IN RESET
               </p>
             </div>
 
             {/* Grid for cards */}
-            <div
-              className="row g-4 d-flex align-items-stretch justify-content-center"
-            >
+            <div className="row g-4 d-flex align-items-stretch justify-content-center">
               {colaboradoresData.map((item) => {
                 const isHovered = hoveredCard === item.id;
                 return (
@@ -141,7 +138,7 @@ const Colaboradores = () => {
                           backgroundImage: `url(${item.image})`,
                           backgroundSize: 'cover',
                           backgroundPosition: 'center',
-                          opacity: isHovered ? '0.3' : '0.05',
+                          opacity: isHovered ? '0.3' : '0.1',
                           transition: 'opacity 0.4s ease',
                           zIndex: 1
                         }}
@@ -161,35 +158,7 @@ const Colaboradores = () => {
 
                       {/* Content */}
                       <div className="position-relative h-100 p-4 d-flex flex-column justify-content-between" style={{ zIndex: 3 }}>
-                        {/* Top Section */}
-                        <div>
-                          {/* Icon */}
-                          <div className="mb-3">
-                            <div
-                              className="d-inline-flex align-items-center justify-content-center"
-                              style={{
-                                width: isHovered ? '70px' : '60px',
-                                height: isHovered ? '70px' : '60px',
-                                background: 'linear-gradient(135deg, #8b5cf6,rgb(178, 156, 180), #a855f7)',
-                                borderRadius: '50%',
-                                boxShadow: `0 8px 25px ${item.shadow}`,
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                transform: isHovered ? 'rotate(10deg)' : 'rotate(0deg)'
-                              }}
-                            >
-                              <span
-                                className="fw-bold"
-                                style={{
-                                  fontSize: isHovered ? '1.8rem' : '1.5rem',
-                                  transition: 'font-size 0.4s ease'
-                                }}
-                              >
-                                {item.icon}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-
+                        
                         {/* Title & Subtitle */}
                         <h3 className="text-white fw-bold mb-2" style={{ fontSize: '1.25rem' }}>
                           {item.title}
@@ -198,13 +167,12 @@ const Colaboradores = () => {
                           {item.subtitle}
                         </p>
                         
-
-                        {/* Expanded Content - Only shown on hover */}
+                        {/* Expanded Content */}
                         <div
                           style={{
-                            maxHeight: isHovered ? '300px' : '0',
-                            opacity: isHovered ? '1' : '0',
-                            overflow: isHovered ? 'visible' : 'hidden',
+                            maxHeight: (SHOW_BUTTON_ALWAYS || isHovered) ? '300px' : '0',
+                            opacity: (SHOW_BUTTON_ALWAYS || isHovered) ? '1' : '0',
+                            overflow: (SHOW_BUTTON_ALWAYS || isHovered) ? 'visible' : 'hidden',
                             transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)'
                           }}
                         >
@@ -214,7 +182,7 @@ const Colaboradores = () => {
                               height: '2px',
                               background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
                               borderRadius: '1px',
-                              width: isHovered ? '100%' : '0%',
+                              width: (SHOW_BUTTON_ALWAYS || isHovered) ? '100%' : '0%',
                               transition: 'width 0.6s ease 0.2s'
                             }}
                           ></div>
@@ -226,7 +194,7 @@ const Colaboradores = () => {
                           <button
                             type="button"
                             className="btn fw-semibold px-4 py-2"
-                            onClick={() => openWhatsAppChat(item.whatsappMessage)} // Llama a la función para abrir WhatsApp
+                            onClick={() => openWhatsAppChat(item.whatsappMessage)}
                             style={{
                               background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                               border: 'none',
@@ -235,7 +203,7 @@ const Colaboradores = () => {
                               fontSize: '0.9rem',
                               boxShadow: '0 4px 15px rgba(168, 85, 247, 0.3)',
                               transition: 'all 0.3s ease',
-                              transform: isHovered ? 'translateY(0)' : 'translateY(20px)'
+                              transform: (SHOW_BUTTON_ALWAYS || isHovered) ? 'translateY(0)' : 'translateY(20px)'
                             }}
                             onMouseOver={(e) => {
                               e.target.style.transform = 'translateY(-2px)';
@@ -259,23 +227,20 @@ const Colaboradores = () => {
             {/* Call to Action Section */}
             <div className="text-center mt-5">
               <div
-                className="p-5 rounded-4"
+                className="p-3 rounded-4"
                 style={{
                   background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(6, 182, 212, 0.15))',
                   border: '1px solid rgba(168, 85, 247, 0.3)',
                   boxShadow: '0 8px 32px rgba(168, 85, 247, 0.1)'
                 }}
               >
-                <h4 className="text-white mb-3 fw-bold fs-3">
-                  ¿Lista para Colaborar?
-                </h4>
                 <p className="text-white-50 mb-4 fs-5">
-                  Únete a nuestra red de colaboradores y construye el futuro tecnológico femenino
+                  Forma parte nuestra red de colaboradores 
                 </p>
                 <button
                   type="button"
-                  className="btn btn-lg px-5 py-3 fw-semibold"
-                  onClick={handleOpenContactModal} // CAMBIO AQUÍ: Ahora abre el modal de contacto
+                  className="btn  px-4 py-2 mb-2 fw-semibold"
+                  onClick={handleOpenContactModal}
                   style={{
                     background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
                     border: 'none',
@@ -293,44 +258,15 @@ const Colaboradores = () => {
                     e.target.style.boxShadow = '0 4px 20px rgba(168, 85, 247, 0.4)';
                   }}
                 >
-                  Iniciar Conversación
+                  Únete a la revolución
                 </button>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Decorative Background Elements */}
-        <div
-          className="position-absolute"
-          style={{
-            top: '10%',
-            left: '-5%',
-            width: '200px',
-            height: '200px',
-            background: 'radial-gradient(circle, rgba(168, 85, 247, 0.08), transparent)',
-            borderRadius: '50%',
-            zIndex: 0,
-            pointerEvents: 'none'
-          }}
-        ></div>
-
-        <div
-          className="position-absolute"
-          style={{
-            bottom: '10%',
-            right: '-5%',
-            width: '300px',
-            height: '300px',
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.08), transparent)',
-            borderRadius: '50%',
-            zIndex: 0,
-            pointerEvents: 'none'
-          }}
-        ></div>
       </div>
 
-      {/* Contact Modal Component - Added here */}
+      {/* Contact Modal Component */}
       <ContactModal show={showContactModal} handleClose={handleCloseContactModal} />
     </section>
   );

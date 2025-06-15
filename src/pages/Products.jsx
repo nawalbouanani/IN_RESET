@@ -10,12 +10,12 @@ const TechEmpowermentProducts = () => {
         <div className="text-center mt-5 mb-5">
           <h2 className="text-3xl md:text-4xl font-bold "
               style={{
-                background: 'linear-gradient(135deg,rgb(76, 13, 134),rgb(210, 163, 228))',
+                background: ' #c1aaee',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
-            Transformando Sectores en Tiempo Real
+            Nuestros Proyectos
           </h2>
           <div className="w-20 h-1 mx-auto mb-3"
                style={{ 
@@ -27,14 +27,14 @@ const TechEmpowermentProducts = () => {
         <div className="row g-4 justify-content-center mt-5"> 
           {/* Card Template */}
           {[{
-            title: "HER CODE",
+            title: "",
             subtitle: "La Catapulta Tecnológica Femenina",
-            description: "En desarrollo: Gamificación + STEAM",
+            description: "Gamificación + STEAM",
             image: herCodeImage
           }, {
-            title: "DE FEMME",
+            title: "",
             subtitle: "La Revolución del Bienestar Femenino",
-            description: "En desarrollo: IA + Autocuidado + Autodefensa",
+            description: "IA + Autocuidado + Autodefensa",
             image: defemmeImage
           }].map((project, idx) => (
             <div key={idx} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
@@ -84,23 +84,23 @@ const TechEmpowermentProducts = () => {
                 </div>
 
                 {/* Contenido */}
-                <div className="card-body p-3 d-flex flex-column"
+                <div className="card-body p-2 d-flex flex-column"
                      style={{ 
                        zIndex: 2,
                        flexGrow: 1,
                        paddingTop: '16px',
-                       minHeight: '160px' // más compacto
+                       minHeight: '60px' // más compacto
                      }}>
-                  <h2 className="card-title h5 fw-bold text-white mb-1 text-center">
+                  <h2 className="card-title h5 fw-bold text-white text-center">
                     {project.title}
                   </h2>
-                  <p className="text-white mb-1 text-center" style={{ opacity: '0.9', fontSize: '0.95rem' }}>
+                  <p className="text-white text-center" style={{ opacity: '0.9', fontSize: '0.95rem' }}>
                     {project.subtitle}
                   </p>
-                  <p className="text-white mb-3 text-center" style={{ opacity: '0.7', fontSize: '0.85rem' }}>
+                  <p className="text-white text-center" style={{ opacity: '0.7', fontSize: '0.85rem' }}>
                     {project.description}
                   </p>
-                  <div className="mt-auto d-flex justify-content-center">
+                 {/*} <div className="mt-auto d-flex justify-content-center">
                     <button className="btn text-white fw-semibold px-3 py-2"
                             style={{
                               background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
@@ -120,7 +120,7 @@ const TechEmpowermentProducts = () => {
                             }}>
                       Conocer Avances
                     </button>
-                  </div>
+                  </div>*/}
                 </div>
               </div>
             </div>

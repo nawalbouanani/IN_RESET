@@ -9,27 +9,20 @@
 
 /* --- Estilos de los Textos del Hero --- */
 .hero-title-purple {
-  color: #a855f7 !important; /* Color principal púrpura */
-  font-size: 2.8rem; /* AÚN MÁS REDUCIDO para el título principal */
-  line-height: 1.1; 
-  /* font-weight: bold; (Ya lo manejas con fw-bold en JSX) */
-  /* margin-bottom: 0; (Ya lo manejas con mb-0 en JSX) */
+  color: #c1aaee !important; /* Color principal púrpura */
+  font-size: 2.5rem; /* AÚN MÁS REDUCIDO para el título principal */
+  line-height: 1.5; 
 }
 
-/* Clase específica para el primer h1 si necesita un tamaño distinto */
-.fs-hero-title-main { 
-    /* Esta clase puede quedar vacía o definir un tamaño si difiere del .hero-title-purple base */
-}
 
 .fs-hero-title-secondary { /* Clase específica para el segundo h1 */
-  font-size: 2.8rem; /* AÚN MÁS REDUCIDO, para que sea menor que el principal */
+  font-size: 2.5rem; /* AÚN MÁS REDUCIDO, para que sea menor que el principal */
   line-height: 1.1;
-  /* margin-bottom: 3rem; (Ya lo manejas con mb-3 en JSX) */
 }
 
 .hero-description-purple {
-  color: #e5e7eb !important; /* Color de la descripción */
-  font-size: 0.95rem; /* REDUCIDO para un tamaño de lectura cómodo */
+  color: #bfc1c4 !important; /* Color de la descripción */
+  font-size: 1rem; /* REDUCIDO para un tamaño de lectura cómodo */
   line-height: 1.6;
   max-width: 500px; /* UN POCO MÁS ESTRECHO: para que se vea más centrado y menos "barra" */
   margin-left: auto; /* ¡CLAVE PARA CENTRAR EL BLOQUE CON MAX-WIDTH! */
@@ -43,7 +36,7 @@
   border: none !important;
   color: white !important;
   font-weight: 600 !important;
-  text-transform: uppercase !important;
+ /* text-transform: uppercase !important;*/
   letter-spacing: 0.5px !important;
   padding: 10px 20px !important; /* REDUCIDO: Antes 12px 24px */
   font-size: 0.9rem !important; /* REDUCIDO: Tamaño de fuente del botón */
