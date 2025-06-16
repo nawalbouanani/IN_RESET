@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@300;400&display=swap');
 
 :root {
   --font-title: 'Rajdhani', sans-serif;
@@ -7,13 +6,43 @@
   --color-lila: #C084FC;
 }
 
-h1, h2, h3, h4, p, a, button, label {
+h1, h2, h3, h4, h5 {
   font-family: var(--font-title);
   color: var(--color-lila);
   letter-spacing: -0.01em;
   line-height: 1.1;
-  text-transform: none; /* o uppercase si querés fuerza */
+  font-weight: 600;
+  text-transform: none;
 }
+
+p, a, button, label {
+  font-family: var(--font-body);
+  color: var(--color-lila);
+  letter-spacing: normal;
+  line-height: 1.4;
+  font-weight: 300; /* esta vez sí se verá más fino */
+  text-transform: none;
+}
+
+
+/* El resto de tu CSS sigue igual */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ... resto de estilos de navbar y media queries ... */
+
 
 
 html, body {

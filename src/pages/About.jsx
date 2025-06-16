@@ -35,9 +35,9 @@ const About = () => {
                   </h3>
                   <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 */}
                     Somos la plataforma
-                    <span className="text-white fw-semibold"> EdTech-HealthTech </span>
+                    <span className="text-white"> EdTech-HealthTech </span>
                     que convierte retos en proyectos escalables. 
-                    <span className="text-white fw-semibold">Transformamos cada desafío en oportunidades de impacto real</span>.
+                    <span className="text-white">Transformamos cada desafío en oportunidades de impacto real</span>.
                   </p>
                 </div>
               </div>
@@ -56,7 +56,7 @@ const About = () => {
                   </h3>
                   <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 para que el párrafo ocupe el espacio restante */}
                     Creemos que cada mujer puede resetear su futuro y crear  
-                    <span className="text-white fw-semibold"> valor exponencial</span>.
+                    <span className="text-white "> valor exponencial</span>.
                     Convertimos problemas en soluciones escalables que transforman sectores completos.
 
                   </p>
