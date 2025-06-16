@@ -7,9 +7,10 @@
   overflow: hidden; /* Oculta cualquier contenido que se desborde */
 }
 
+
 /* --- Estilos de los Textos del Hero --- */
 .hero-title-purple {
-  color: #c1aaee !important; /* Color principal púrpura */
+  color: #442386 !important; /* Color principal púrpura */
   font-size: 2.5rem; /* AÚN MÁS REDUCIDO para el título principal */
   line-height: 1.5; 
 }
@@ -119,10 +120,11 @@
 
 .ticker-item {
   color: #ffffff; /* Color del texto de los items del ticker */
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  margin-right: 2rem; /* Espaciado entre items */
+  font-family: var(--font-title);
+  letter-spacing: 0.2px;
+  margin-right: 1rem; /* Espaciado entre items */
   display: inline-flex;
   align-items: center;
   text-transform: uppercase;
@@ -204,4 +206,65 @@
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
   }
+}
+/* --- ANIMACIONES Y EFECTOS AÑADIDOS --- */
+
+/* Efecto de entrada desde la derecha */
+@keyframes slideInRight {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out both;
+}
+
+/* Efecto de fade-up con retardo */
+@keyframes fadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fadeUp 1s ease-out both;
+}
+.animate-delay-3 {
+  animation-delay: 0.8s;
+}
+
+/* Glow suave en el texto */
+.glow-text {
+  text-shadow: 0 0 10px #a259ff55;
+}
+
+/* Palabras destacadas con subrayado animado */
+.highlight-word {
+  position: relative;
+  color: #a259ff;
+  cursor: pointer;
+}
+.highlight-word::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: #a259ff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.highlight-word:hover::after {
+  transform: scaleX(1);
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import moradito from "../assets/img/moradito.png";
 
 const About = () => {
   return (
@@ -8,15 +7,16 @@ const About = () => {
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
             {/* Header con imagen en lugar de texto */}
-            <div className="text-center mb-5">
-              <img
-                src={moradito} // <-- Cambia esto por la ruta real de tu logo
-                alt="IN RESET Logo"
-                className="img-fluid mb-3 mt-4"
-                style={{ maxHeight: '80px' }} // <-- Ajusta la altura del logo según tu diseño
-              />
-            </div>
-
+            
+<div
+            className="mx-auto mb-5"
+            style={{
+              width: '60px',
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
+              borderRadius: '1px'
+            }}>
+        </div>
             {/* Content - Cards de Misión y Qué Somos */}
             {/* AÑADIDO: d-flex y align-items-stretch al row para igualar alturas */}
             <div className="row align-items-center d-flex align-items-stretch">
@@ -34,10 +34,10 @@ const About = () => {
                     Quiénes Somos
                   </h3>
                   <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 */}
-                    Somos una plataforma
+                    Somos la plataforma
                     <span className="text-white fw-semibold"> EdTech-HealthTech </span>
-                    que impulsa proyectos con impacto social y económico,
-                    <span className="text-white fw-semibold"> diseñados por y para mujeres</span>.
+                    que convierte retos en proyectos escalables. 
+                    <span className="text-white fw-semibold">Transformamos cada desafío en oportunidades de impacto real</span>.
                   </p>
                 </div>
               </div>
@@ -55,10 +55,10 @@ const About = () => {
                     Nuestra Misión
                   </h3>
                   <p className="text-white-50 mb-0 lh-lg flex-grow-1"> {/* AÑADIDO: flex-grow-1 para que el párrafo ocupe el espacio restante */}
-                    En IN RESET creemos que cada etapa en la vida de una mujer puede convertirse en una
-                    <span className="text-white fw-semibold"> oportunidad de cambio</span>.
-                    Transformamos desafíos en soluciones reales, acompañando a cada mujer en el camino
-                    de resetear y redefinir su futuro.
+                    Creemos que cada mujer puede resetear su futuro y crear  
+                    <span className="text-white fw-semibold"> valor exponencial</span>.
+                    Convertimos problemas en soluciones escalables que transforman sectores completos.
+
                   </p>
                 </div>
               </div>

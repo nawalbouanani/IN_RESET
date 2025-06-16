@@ -9,7 +9,7 @@ const Pilares = () => {
           <h2
             className="display-6 fw-bold mt-5 mb-3"
             style={{
-              background: ' #c1aaee',
+              background: ' #442386',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',

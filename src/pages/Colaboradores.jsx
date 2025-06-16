@@ -29,9 +29,9 @@ const Colaboradores = () => {
   const colaboradoresData = [
     {
       id: 'empresas',
-      title: 'EMPRESAS & MARCAS',
-      subtitle: 'Acceso a audiencias segmentadas',
-      description: 'Conecta con nuestra comunidad de mujeres empoderadas y amplifica tu impacto de marca a través de experiencias auténticas y transformadoras.',
+      title: 'Empresas & Marcas',
+      subtitle: 'Accede a audiencias altamente segmentadas y comprometidas',
+      description: 'Genera conexiones auténticas que impulsan resultados medibles.',
       cta: 'Explorar Alianzas',
       whatsappMessage: '¡Hola! Estoy interesado/a en las Alianzas para Empresas y Marcas. Me gustaría obtener más información.',
       image: linkedinImg,
@@ -41,9 +41,9 @@ const Colaboradores = () => {
     },
     {
       id: 'inversores',
-      title: 'INVERSORES',
-      subtitle: 'Portfolio de impacto exponencial',
-      description: 'Invierte en el futuro de la tecnología femenina. Proyectos escalables con impacto social medible y retorno sostenible a largo plazo.',
+      title: 'Inversores',
+      subtitle: 'Únete al crecimiento de mercados emergentes con alta demanda',
+      description: ' Oportunidad real en tecnología educativa y de bienestar con potencial escalable.',
       cta: 'Ver Oportunidades',
       whatsappMessage: '¡Hola! Estoy interesado/a en oportunidades de inversión. Me gustaría conocer más sobre los proyectos de IN RESET.',
       image: inversoresImg,
@@ -53,9 +53,9 @@ const Colaboradores = () => {
     },
     {
       id: 'patrocinadores',
-      title: 'PATROCINADORES',
-      subtitle: 'Integración en experiencias',
-      description: 'Forma parte de eventos, talleres y programas formativos que transforman vidas. Tu marca asociada al empoderamiento tecnológico femenino.',
+      title: 'Patrocinadores',
+      subtitle: 'Posicionamiento estratégico en mercados emergentes',
+      description: 'Visibilidad premium en experiencias que generan comunidad y fidelización.',
       cta: 'Conocer Programas',
       whatsappMessage: '¡Hola! Estoy interesado/a en los programas de patrocinio de IN RESET. Me gustaría conocer más detalles.',
       image: patrocinadoresImg,
@@ -65,9 +65,9 @@ const Colaboradores = () => {
     },
     {
       id: 'cocreacion',
-      title: 'CO-CREACIÓN',
-      subtitle: 'Desarrollo de proyectos conjuntos',
-      description: 'Colabora directamente en el desarrollo de soluciones innovadoras. Desde la ideación hasta la implementación de productos disruptivos.',
+      title: 'Co-Creación',
+      subtitle: 'Imagina crear la próxima revolución tecnológica juntos',
+      description: 'Desarrollamos productos que no existen pero que el mundo necesita.',
       cta: 'Iniciar Proyecto',
       whatsappMessage: '¡Hola! Estoy interesado/a en iniciar un proyecto de co-creación con IN RESET. Me gustaría discutir mi idea.',
       image: cocreacionImg,
@@ -84,29 +84,28 @@ const Colaboradores = () => {
           <div className="col-12">
             {/* Header */}
             <div className="text-center mt-5 mb-5">
-              <h2
-                className="text-4xl md:text-5xl font-bold mb-3"
+              <h4 className="display-6 fw-bold mb-3"
                 style={{
-                  background: ' #c1aaee',
+                  background: '#442386',
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                   backgroundClip: 'text'
                 }}
               >
                 Colabora con nosotras
-              </h2>
-              <div
-                className="mx-auto mb-3"
-                style={{
-                  width: '100px',
-                  height: '4px',
-                  background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                  borderRadius: '2px'
-                }}
-              ></div>
-              <p className="text-white-50 fs-5">
+              </h4>              
+              <p className="text-white-50 fs-5 mb-4">
                 Construye el futuro con IN RESET
               </p>
+              <div
+            className="mx-auto"
+            style={{
+              width: '60px',
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
+              borderRadius: '1px'
+            }}>
+        </div>
             </div>
 
             {/* Grid for cards */}
@@ -180,7 +179,7 @@ const Colaboradores = () => {
                             className="mb-4"
                             style={{
                               height: '2px',
-                              background: 'linear-gradient(90deg, #a855f7, #06b6d4)',
+                              background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
                               borderRadius: '1px',
                               width: (SHOW_BUTTON_ALWAYS || isHovered) ? '100%' : '0%',
                               transition: 'width 0.6s ease 0.2s'
@@ -196,7 +195,7 @@ const Colaboradores = () => {
                             className="btn fw-semibold px-4 py-2"
                             onClick={() => openWhatsAppChat(item.whatsappMessage)}
                             style={{
-                              background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
+                              background: 'linear-gradient(135deg,rgb(73, 30, 102),rgb(116, 41, 185),rgb(150, 85, 211))',
                               border: 'none',
                               color: 'white',
                               borderRadius: '25px',
@@ -242,7 +241,7 @@ const Colaboradores = () => {
                   className="btn  px-4 py-2 mb-2 fw-semibold"
                   onClick={handleOpenContactModal}
                   style={{
-                    background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
+                    background: 'linear-gradient(135deg,rgb(73, 30, 102),rgb(116, 41, 185),rgb(150, 85, 211))',
                     border: 'none',
                     color: 'white',
                     borderRadius: '50px',

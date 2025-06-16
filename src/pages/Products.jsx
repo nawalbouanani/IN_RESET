@@ -4,23 +4,32 @@ import defemmeImage from "../assets/img/defemme.jpg";
 
 const TechEmpowermentProducts = () => {
   return (
-    <div id="proyectos" className="min-h-screen mt-5 mb-5" style={{ backgroundColor: '#0a0a0a' }}>
+    <div id="proyectos" className="display-6 min-h-screen mt-5 mb-5" style={{ backgroundColor: '#0a0a0a' }}>
       <div className="container mx-auto px-4 py-12"> {/* padding reducido aquí */}
         {/* Header */}
         <div className="text-center mt-5 mb-5">
-          <h2 className="text-3xl md:text-4xl font-bold "
+          <h4 className="display-6 fw-bold mb-3"
               style={{
-                background: ' #c1aaee',
+                background: ' #442386',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text'
               }}>
             Nuestros Proyectos
-          </h2>
-          <div className="w-20 h-1 mx-auto mb-3"
-               style={{ 
-                 background: 'linear-gradient(90deg, #a855f7, #06b6d4)' 
-               }}></div>
+          </h4>
+          
+              <p className="text-white-50 fs-5 mb-4">
+                Crecimiento y oportunidad en cada producto
+              </p>
+          <div
+            className="mx-auto "
+            style={{
+              width: '60px',
+              height: '2px',
+              background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
+              borderRadius: '1px'
+            }}>
+        </div>
         </div>
 
         {/* Products Grid */}
@@ -126,31 +135,6 @@ const TechEmpowermentProducts = () => {
             </div>
           ))}
         </div>
-
-        {/* Decorative Backgrounds */}
-        <div className="position-fixed" 
-             style={{ 
-               top: '20%', 
-               left: '-100px', 
-               width: '200px', 
-               height: '200px',
-               background: 'radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent)',
-               borderRadius: '50%',
-               zIndex: 0,
-               pointerEvents: 'none'
-             }}></div>
-        
-        <div className="position-fixed" 
-             style={{ 
-               bottom: '20%', 
-               right: '-100px', 
-               width: '300px', 
-               height: '300px',
-               background: 'radial-gradient(circle, rgba(6, 182, 212, 0.1), transparent)',
-               borderRadius: '50%',
-               zIndex: 0,
-               pointerEvents: 'none'
-             }}></div>
       </div>
     </div>
   );
