@@ -4,11 +4,15 @@ import defemmeImage from "../assets/img/defemme.jpg";
 
 const TechEmpowermentProducts = () => {
   return (
-    <div id="proyectos" className="display-6 min-h-screen mt-5 mb-5" style={{ backgroundColor: '#0a0a0a' }}>
-      <div className="container mx-auto px-4 py-12"> {/* padding reducido aquí */}
+    <div id="proyectos" className="min-vh-100 d-flex flex-column" style={{ 
+      backgroundColor: '#0a0a0a',
+      paddingTop: '05px', // Espacio para el navbar fijo
+      scrollMarginTop: '80px' // Para navegación suave
+    }}>
+      <div className="container mx-auto px-4 py-2 flex-grow-1 d-flex flex-column justify-content-center">
         {/* Header */}
-        <div className="text-center mt-5 mb-5">
-          <h4 className="display-6 fw-bold mb-3"
+        <div className="text-center mb-5">
+          <h4 className="title display-6 fw-bold mb-3"
               style={{
                 background: ' #442386',
                 WebkitBackgroundClip: 'text',
@@ -18,22 +22,23 @@ const TechEmpowermentProducts = () => {
             Nuestros Proyectos
           </h4>
           
-              <p className="text-white-50 fs-5 mb-4">
-                Crecimiento y oportunidad en cada producto
-              </p>
+          <p className="text-white-50 fs-5 mb-4">
+            Crecimiento y oportunidad en cada producto
+          </p>
+          
           <div
-            className="mx-auto "
+            className="mx-auto"
             style={{
               width: '60px',
               height: '2px',
               background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
               borderRadius: '1px'
             }}>
-        </div>
+          </div>
         </div>
 
         {/* Products Grid */}
-        <div className="row g-4 justify-content-center mt-5"> 
+        <div className="row g-4 justify-content-center flex-grow-1 align-items-center"> 
           {/* Card Template */}
           {[{
             title: "",
@@ -46,7 +51,7 @@ const TechEmpowermentProducts = () => {
             description: "IA + Autocuidado + Autodefensa",
             image: defemmeImage
           }].map((project, idx) => (
-            <div key={idx} className="col-12 col-md-6 col-lg-4 d-flex align-items-stretch">
+            <div key={idx} className="col-12 col-md-6 col-xl-5 d-flex align-items-stretch">
               <div className="card h-100 border-0 position-relative overflow-hidden flex-fill"
                    style={{ 
                      background: idx % 2 === 0 
@@ -56,13 +61,15 @@ const TechEmpowermentProducts = () => {
                      borderRadius: '20px',
                      boxShadow: '0 8px 32px rgba(168, 85, 247, 0.1)',
                      display: 'flex',
-                     flexDirection: 'column'
+                     flexDirection: 'column',
+                     maxWidth: '400px',
+                     margin: '0 auto'
                    }}>
                 
                 {/* Imagen */}
                 <div className="w-100 position-relative"
                      style={{
-                       height: '220px',
+                       height: '250px',
                        borderRadius: '20px 20px 0 0',
                        overflow: 'hidden'
                      }}>
@@ -81,7 +88,7 @@ const TechEmpowermentProducts = () => {
 
                 {/* Badge */}
                 <div className="position-absolute top-0 start-0 m-3" style={{ zIndex: 3 }}>
-                  <span className="badge px-2 py-2 text-white fw-normal"
+                  <span className="badge px-3 py-2 text-white fw-normal"
                         style={{ 
                           backgroundColor: 'rgba(168, 85, 247, 0.8)',
                           borderRadius: '25px',
@@ -93,43 +100,20 @@ const TechEmpowermentProducts = () => {
                 </div>
 
                 {/* Contenido */}
-                <div className="card-body p-2 d-flex flex-column"
+                <div className="card-body p-4 d-flex flex-column justify-content-center text-center"
                      style={{ 
                        zIndex: 2,
-                       flexGrow: 1,
-                       paddingTop: '16px',
-                       minHeight: '60px' // más compacto
+                       flexGrow: 1
                      }}>
-                  <h2 className="card-title h5 fw-bold text-white text-center">
+                  <h2 className="card-title h5 fw-bold text-white mb-3">
                     {project.title}
                   </h2>
-                  <p className="text-white text-center" style={{ opacity: '0.9', fontSize: '0.95rem' }}>
+                  <h3 className="h6 text-white mb-3" style={{ opacity: '0.9' }}>
                     {project.subtitle}
-                  </p>
-                  <p className="text-white text-center" style={{ opacity: '0.7', fontSize: '0.85rem' }}>
+                  </h3>
+                  <p className="text-white mb-0" style={{ opacity: '0.7', fontSize: '0.9rem' }}>
                     {project.description}
                   </p>
-                 {/*} <div className="mt-auto d-flex justify-content-center">
-                    <button className="btn text-white fw-semibold px-3 py-2"
-                            style={{
-                              background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
-                              border: 'none',
-                              borderRadius: '25px',
-                              fontSize: '0.85rem',
-                              boxShadow: '0 4px 20px rgba(168, 85, 247, 0.4)',
-                              transition: 'all 0.3s ease'
-                            }}
-                            onMouseOver={(e) => {
-                              e.target.style.transform = 'translateY(-2px)';
-                              e.target.style.boxShadow = '0 8px 30px rgba(168, 85, 247, 0.6)';
-                            }}
-                            onMouseOut={(e) => {
-                              e.target.style.transform = 'translateY(0)';
-                              e.target.style.boxShadow = '0 4px 20px rgba(168, 85, 247, 0.4)';
-                            }}>
-                      Conocer Avances
-                    </button>
-                  </div>*/}
                 </div>
               </div>
             </div>

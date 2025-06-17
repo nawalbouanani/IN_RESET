@@ -78,13 +78,17 @@ const Colaboradores = () => {
   ];
 
   return (
-    <section id="contacto" className="py-5">
+    <section id="contacto" className="min-vh-100 d-flex flex-column" style={{ 
+      backgroundColor: '#0a0a0a',
+      paddingTop: '05px', // Espacio para el navbar fijo
+      scrollMarginTop: '80px' // Para navegación suave
+    }}>
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12">
             {/* Header */}
-            <div className="text-center mt-5 mb-5">
-              <h4 className="display-6 fw-bold mb-3"
+            <div className="text-center mt-2 mb-5">
+              <h4 className="title display-6 fw-bold mb-3"
                 style={{
                   background: '#442386',
                   WebkitBackgroundClip: 'text',

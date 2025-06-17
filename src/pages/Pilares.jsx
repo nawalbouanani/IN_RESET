@@ -2,12 +2,16 @@ import React from 'react';
 
 const Pilares = () => {
   return (
-    <section id="pilares" className="py-5">
+    <section id="pilares" className="min-vh-100 d-flex flex-column" style={{ 
+      backgroundColor: '#0a0a0a',
+      paddingTop: '05px', // Espacio para el navbar fijo
+      scrollMarginTop: '80px' // Para navegación suave
+    }}>
       <div className="container">
         {/* Título principal mejorado */}
         <div className="text-center mb-5">
           <h2
-            className="display-6 fw-bold mt-5 mb-3"
+            className="title display-6 fw-bold mt-5 mb-3"
             style={{
               background: ' #442386',
               WebkitBackgroundClip: 'text',
@@ -39,7 +43,7 @@ const Pilares = () => {
             <div className="px-4 py-4">
               <div className="mb-3">
                 <span 
-                  className="badge fs-6 px-3 py-2"
+                  className="badge fs-6 px-3 py-2  mb-3"
                   style={{
                     background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(6, 182, 212, 0.2))',
                     border: '1px solid rgba(168, 85, 247, 0.3)',
@@ -49,7 +53,7 @@ const Pilares = () => {
                   01
                 </span>
               </div>
-              <h4 className="text-white fw-bold mb-3 fs-4">
+              <h4 className="text-white  mb-3 fs-4">
                 Identificación de Nichos
               </h4>
               <p className="text-white-50 mb-0 lh-lg fs-6">
@@ -73,7 +77,7 @@ const Pilares = () => {
             <div className="px-4 py-4">
               <div className="mb-3">
                 <span 
-                  className="badge fs-6 px-3 py-2"
+                  className="badge fs-6 px-3 py-2  mb-3"
                   style={{
                     background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(168, 85, 247, 0.2))',
                     border: '1px solid rgba(6, 182, 212, 0.3)',
@@ -83,7 +87,7 @@ const Pilares = () => {
                   02
                 </span>
               </div>
-              <h4 className="text-white fw-bold mb-3 fs-4">
+              <h4 className="text-white  mb-3 fs-4">
                 Soluciones a Medida
               </h4>
               <p className="text-white-50 mb-0 lh-lg fs-6">
@@ -107,7 +111,7 @@ const Pilares = () => {
             <div className="px-4 py-4">
               <div className="mb-3">
                 <span 
-                  className="badge fs-6 px-3 py-2"
+                  className="badge fs-6 px-3 py-2 mb-3"
                   style={{
                     background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(6, 182, 212, 0.2))',
                     border: '1px solid rgba(168, 85, 247, 0.3)',
@@ -117,7 +121,7 @@ const Pilares = () => {
                   03
                 </span>
               </div>
-              <h4 className="text-white fw-bold mb-3 fs-4">
+              <h4 className="text-white mb-3 fs-4">
                 Escalabilidad e Impacto
               </h4>
               <p className="text-white-50 mb-0 lh-lg fs-6">
