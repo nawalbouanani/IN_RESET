@@ -139,7 +139,7 @@ const ContactModal = ({ show, handleClose }) => {
               <div className="col-12 col-lg-6 d-flex">
                 <div className="p-3 w-100 d-flex flex-column" >
                   <div>
-                    <h2 className="text-white text-start font-bold mb-4" style={titleStyle}>Contáctanos</h2>
+                    <h2 className="text-white text-start mt-3 mb-3" style={titleStyle}>CONTÁCTANOS</h2>
                   </div>
                   <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
                     <div className="row g-2">
@@ -164,11 +164,6 @@ const ContactModal = ({ show, handleClose }) => {
                       </div>
                     </div>
 
-                    <div>
-                      <label htmlFor="mensaje" className="form-label mb-2" style={labelStyle}>Mensaje</label>
-                      <textarea id="mensaje" name="mensaje" rows="2" value={formData.mensaje} onChange={handleChange} required className="form-control" style={formControlStyleInputs}></textarea>
-                    </div>
-
                     <div className="row g-1">
                       {[
                         ['empresasMarcas', 'Empresas & Marcas'],
@@ -177,17 +172,22 @@ const ContactModal = ({ show, handleClose }) => {
                         ['coCreacion', 'Co-creación']
                       ].map(([key, label]) => (
                         <div className="col-6" key={key}>
-                          <div className="form-check">
+                          <div className="form-check mt-2">
                             <input type="checkbox" id={key} name={key} checked={formData[key]} onChange={handleChange} className="form-check-input" style={checkboxStyle(formData[key])} />
-                            <label htmlFor={key} className="form-check-label mb-2" style={{ ...labelStyle, fontSize: '0.7rem' }}>{label}</label>
+                            <label htmlFor={key} className="form-check-label mb-2" style={{ ...labelStyle, fontSize: '0.8rem',  verticalAlign: 'middle', }}>{label}</label>
                           </div>
                         </div>
                       ))}
                     </div>
+                    <div>
+                      <label htmlFor="mensaje" className="form-label mb-2" style={labelStyle}>Mensaje</label>
+                      <textarea id="mensaje" name="mensaje" rows="2" value={formData.mensaje} onChange={handleChange} required className="form-control" style={formControlStyleInputs}></textarea>
+                    </div>
 
-                    <div className="form-check mb-2">
+
+                    <div className="form-check mt-2 mb-4">
                       <input type="checkbox" id="privacidad" name="privacidad" checked={formData.privacidad} onChange={handleChange} required className="form-check-input" style={checkboxStyle(formData.privacidad)} />
-                      <label htmlFor="privacidad" className="form-check-label  mb-5" style={{ ...labelStyle, fontSize: '0.75rem' }}>Acepto los términos de privacidad</label>
+                      <label htmlFor="privacidad" className="form-check-label " style={{ ...labelStyle, fontSize: '0.8rem',  verticalAlign: 'middle', }}>Acepto los términos de privacidad</label>
                     </div>
 
                     <button type="submit" className="btn w-100 text-white fw-semibold px-3 py-2" style={submitButtonStyle}>Enviar mensaje</button>
@@ -211,7 +211,7 @@ const ContactModal = ({ show, handleClose }) => {
 
 const labelStyle = {
   color: '#e0e0e0',
-  fontSize: '0.75rem',
+  fontSize: '0.8rem',
   marginBottom: '0.2rem',
 };
 
@@ -221,7 +221,7 @@ const formControlStyleInputs = {
   color: '#333',
   borderRadius: '5px',
   padding: '0.4rem 0.6rem',
-  fontSize: '0.75rem',
+  fontSize: '0.8rem',
 };
 
 const checkboxStyle = (checked) => ({
@@ -250,7 +250,7 @@ const closeButtonStyle = {
 };
 
 const submitButtonStyle = {
-  background: 'linear-gradient(135deg, #8b5cf6, #b043b9, #a855f7)',
+  background: 'linear-gradient(135deg,rgb(73, 30, 102),rgb(116, 41, 185),rgb(150, 85, 211))',
   border: 'none',
   borderRadius: '20px',
   boxShadow: '0 4px 12px rgba(168, 85, 247, 0.3)',
@@ -259,8 +259,8 @@ const submitButtonStyle = {
 };
 
 const titleStyle = {
-  fontSize: '1.1rem',
-  background: ' #c1aaee',
+  fontSize: '1.6rem',
+  background: ' #442386',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
   backgroundClip: 'text',

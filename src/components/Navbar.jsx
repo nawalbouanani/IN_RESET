@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/img/logo.png";
+import logo from "../assets/img/logomorado.png";
 
 export const Navbar = () => {
   return (
@@ -40,7 +40,6 @@ export const Navbar = () => {
               width: '150px',
               height: 'auto',
               maxHeight: '100%',
-              filter: 'drop-shadow(0 0 5px rgba(168, 85, 247, 0.5))',
               display: 'block'
             }}
           />
