@@ -1,160 +1,228 @@
-import React from 'react';
-import NetworkAnimation2 from './networkAnimation2.jsx';
-import './hero.css';
+import React, { useState, useEffect } from 'react';
 
 const Hero = () => {
-  // Logros para el ticker
-  const achievements = [
-    "Premios Fundadoras 2024",
-    "Featured Las Provincias",
-    "Premio UE Madrid",
-    "Social Nest Foundation",
-    "Valencia Plaza Interview",
-    "FORINVEST 2024",
-    "VDS 2024"
-  ];
+  const [visibleWords, setVisibleWords] = useState([]);
+  const [showDescription, setShowDescription] = useState(false);
 
-  const AchievementsTicker = () => (
-    <div 
-      className="achievements-ticker position-absolute start-0 w-100 d-flex align-items-center"
-      style={{ 
-        bottom: '10vh', // o '60px' si prefieres fijo
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        padding: '0.5rem 0',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-        height: '40px',
-        backdropFilter: 'blur(4px)'
-      }}
-    >
-      <div className="d-inline-block" style={{ animation: 'scroll-left 40s linear infinite' }}>
-        {[...achievements, ...achievements, ...achievements].map((achievement, index) => (
-          <span key={index} className="mx-3 text-uppercase text-white-50" style={{ fontSize: '0.9rem' }}>
-            {achievement}
-            <span className="mx-3" style={{ color: '#a855f7' }}>•</span>
-          </span>
-        ))}
-      </div>
+  const words = ['Educación', 'Tecnología', 'Experiencias'];
 
-      <style>{`
-        @keyframes scroll-left {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
-    </div>
-  );
+  useEffect(() => {
+    // Mostrar palabras una por una
+    words.forEach((_, index) => {
+      setTimeout(() => {
+        setVisibleWords(prev => [...prev, index]);
+      }, 800 + (index * 600)); // 800ms inicial, luego cada 600ms
+    });
+
+    // Mostrar descripción después de todas las palabras
+    setTimeout(() => {
+      setShowDescription(true);
+    }, 800 + (words.length * 600) + 500);
+  }, []);
 
   return (
     <section
-      id="hero"
-      className="hero-section position-relative text-light"
-      style={{ 
-        height: '100vh', 
+      className="d-flex flex-column justify-content-start"
+      style={{
+        minHeight: '100vh',
+        position: 'relative',
         overflow: 'hidden',
-        scrollMarginTop: '80px' 
+        paddingTop: '60px' // AJUSTE: Puedes seguir ajustando este valor para subir el contenido principal.
       }}
     >
-      {/* Network Animation Background */}
-      <NetworkAnimation2 />
+      <div className="container-fluid">
+        <div className="row align-items-center justify-content-between">
 
-     {/* Contenido principal del Hero */}
-      <div className="hero-content d-flex flex-column justify-content-center align-items-start h-100" style={{ paddingTop: '10px' }}>
-        <div className="container-fluid">
-          <div className="row justify-content-start">
-            <div className="col-12 col-lg-7 col-xl-6"> 
-              <div className="hero-text-container text-start ps-3 ps-lg-5">
+          {/* Títulos a la izquierda */}
+          <div className="col-12 col-lg-3 text-start ps-4" style={{ marginTop: '30px' }}> {/* AJUSTE: Puedes seguir ajustando este valor para subir los títulos. */}
+            <div>
+              {words.map((word, index) => (
                 <h1
-                  className="hero-title fw-bold mb-1 animate-slide-in-right"
-                  style={{ 
-                    fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', 
-                    color: '#442386',
-                    lineHeight: '1.1',
-                    letterSpacing: '-0.02em'
+                  key={word}
+                  className="mb-3"
+                  style={{
+                    fontSize: 'clamp(2.5rem, 7vw, 5rem)',
+                    fontWeight: '600',
+                    letterSpacing: '-0.03em',
+                    color: 'white',
+                    textShadow: '0 4px 12px rgba(0,0,0,0.4)',
+                    opacity: visibleWords.includes(index) ? 1 : 0,
+                    transform: visibleWords.includes(index)
+                      ? 'translateX(0) scale(1)'
+                      : 'translateX(-50px) scale(0.8)',
+                    transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                    margin: '0 0 1rem 0',
+                    lineHeight: '0.9',
+                    display: 'block'
                   }}
                 >
-                  CONVERTIMOS DESAFÍOS
+                  {word}
                 </h1>
-                
-                <h1
-                  className="hero-title fw-bold mb-1 animate-slide-in-right"
-                  style={{ 
-                    fontSize: 'clamp(2.2rem, 5vw, 3.2rem)', 
-                    color: '#442386',
-                    lineHeight: '1.1',
-                    letterSpacing: '-0.02em'
-                  }}
-                >
-                  EN
-                </h1>
-                
-                <h1 className="hero-title mb-4 animate-fade-up animate-delay-1">
-                  <span
-                    className="glow-text d-block"
-                    style={{
-                      fontSize: 'clamp(2.4rem, 5.5vw, 3.5rem)',
-                      fontWeight: '600',
-                      lineHeight: '1',
-                      color: '#a06fff',
-                      textShadow: '0 0 30px rgba(160, 111, 255, 0.5)',
-                      letterSpacing: '-0.01em'
-                    }}
-                  >
-                    OPORTUNIDADES
-                  </span>
-                </h1>
-                
-                <div className="d-flex justify-content-start">
-                  <p
-                    className="animate-fade-up animate-delay-2 mb-0"
-                    style={{
-                      color: '#bfc1c4',
-                      fontSize: 'clamp(1rem, 2vw, 1.1rem)',
-                      maxWidth: '400px',
-                      textAlign: 'left',
-                      lineHeight: '1.6',
-                      fontWeight: '300'
-                    }}
-                  >
-                    Juntos, podemos resetear y redefinir el futuro.
-                  </p>
-                </div>
-                
-                {/* Call to Action Button - Opcional 
-                <div className="d-flex justify-content-start mt-4">
-                  <button
-                    className="btn btn-lg px-4 py-3 fw-semibold animate-fade-up animate-delay-3"
-                    style={{
-                      background: 'linear-gradient(135deg, #8b5cf6, #a855f7, #9333ea)',
-                      border: 'none',
-                      color: 'white',
-                      borderRadius: '50px',
-                      boxShadow: '0 8px 32px rgba(168, 85, 247, 0.3)',
-                      transition: 'all 0.3s ease',
-                      backdropFilter: 'blur(10px)',
-                      fontSize: '0.95rem',
-                      letterSpacing: '0.3px'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.transform = 'translateY(-3px)';
-                      e.target.style.boxShadow = '0 12px 40px rgba(168, 85, 247, 0.4)';
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.transform = 'translateY(0)';
-                      e.target.style.boxShadow = '0 8px 32px rgba(168, 85, 247, 0.3)';
-                    }}
-                  >
-                    Descubre Más
-                  </button>
-                </div>*/}
-              </div>
+              ))}
             </div>
+          </div>
+
+          {/* Espacio central para objeto 3D */}
+          <div className="col-12 col-lg-6 d-flex justify-content-center">
+            <div style={{ minHeight: '300px' }}></div> {/* Placeholder para el 3D model */}
+          </div>
+
+          {/* Descripción a la derecha */}
+          <div className="col-12 col-lg-3 text-end pe-4" style={{ marginTop: '30px' }}> {/* AJUSTE: Puedes seguir ajustando este valor para subir la descripción. */}
+            <div
+              style={{
+                opacity: showDescription ? 1 : 0,
+                transform: showDescription ? 'translateX(0)' : 'translateX(50px)',
+                transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                maxWidth: '280px',
+                marginLeft: 'auto'
+              }}
+            >
+              <p
+                style={{
+                  color: 'rgba(255, 255, 255, 0.8)',
+                  lineHeight: '1.6',
+                  fontWeight: '300',
+                  fontSize: 'clamp(1rem, 2vw, 1.3rem)',
+                  textAlign: 'justify',
+                  marginBottom: '0'
+                }}
+              >
+                Transformamos desafíos en{' '}
+                <span style={{ color: '#8B5CF6', fontWeight: '500' }}>
+                  soluciones escalables
+                </span>{' '}
+                que revolucionan sectores completos. Creamos valor exponencial a través de la innovación tecnológica.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* Carousel infinito de premios - sin redondeado en los extremos */}
+      {/* ELIMINÉ EL DIV DEL SCROLL INDICATOR COMPLETO */}
+      <div
+        className="position-absolute"
+        style={{
+          bottom: '12%', // AJUSTE: Volví a 12% ya que no hay "Descubre más" encima. Puedes ajustar esto ahora para la posición final del carousel.
+          left: '0',
+          right: '0',
+          opacity: showDescription ? 1 : 0,
+          transition: 'all 1s ease 1s',
+          overflow: 'hidden'
+        }}
+      >
+        <div
+          style={{
+            background: 'rgba(139, 92, 246, 0.08)',
+            borderTop: '1px solid rgba(139, 92, 246, 0.2)',
+            borderBottom: '1px solid rgba(139, 92, 246, 0.2)',
+            padding: '12px 0',
+            backdropFilter: 'blur(10px)',
+            width: '100vw',
+            marginLeft: 'calc(-50vw + 50%)'
+          }}
+        >
+          <div
+            className="d-flex align-items-center"
+            style={{
+              animation: showDescription ? 'scrollInfinite 25s linear infinite' : 'none',
+              gap: '0',
+              whiteSpace: 'nowrap'
+            }}
+            onMouseEnter={(e) => e.target.style.animationPlayState = 'paused'}
+            onMouseLeave={(e) => e.target.style.animationPlayState = 'running'}
+          >
+            {[
+              'Startup del Año 2024',
+              'Innovation Award',
+              'Best EdTech Platform',
+              'Top 10 HealthTech',
+              'Female Leadership Prize',
+              'Tech Excellence Award',
+              'Startup del Año 2024',
+              'Innovation Award',
+              'Best EdTech Platform',
+              'Top 10 HealthTech',
+              'Female Leadership Prize',
+              'Tech Excellence Award'
+            ].map((award, index) => (
+              <div key={index} className="d-flex align-items-center">
+                <span
+                  style={{
+                    color: '#8B5CF6',
+                    fontSize: '1rem',
+                    fontWeight: '500',
+                    padding: '0 2rem',
+                    transition: 'all 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.color = '#A855F7';
+                    e.target.style.transform = 'scale(1.05)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.color = '#8B5CF6';
+                    e.target.style.transform = 'scale(1)';
+                  }}
+                >
+                  {award}
+                </span>
+                {index < 11 && (
+                  <div style={{
+                    width: '4px',
+                    height: '4px',
+                    borderRadius: '50%',
+                    background: '#8B5CF6',
+                    flexShrink: 0,
+                    opacity: 0.6
+                  }} />
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Ticker de Logros */}
-      <AchievementsTicker />
+      <style jsx>{`
+        @keyframes scrollInfinite {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+
+        @keyframes bounce {
+          0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+          }
+          40% {
+            transform: translateY(-15px);
+          }
+          60% {
+            transform: translateY(-8px);
+          }
+        }
+
+        @media (max-width: 991px) {
+          .row > div:first-child {
+            text-align: center !important;
+            padding-left: 1rem !important;
+            margin-bottom: 2rem;
+          }
+          .row > div:last-child {
+            text-align: center !important;
+            padding-right: 1rem !important;
+            margin-top: 2rem;
+          }
+          .row > div:last-child > div {
+            margin-left: auto !important;
+            margin-right: auto !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
