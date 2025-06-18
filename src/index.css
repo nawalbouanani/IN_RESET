@@ -17,7 +17,7 @@ h1.hero-title, .glow-text {
   color: var(--color-lila);
 }
 
- h3, h4, h5, .title {
+h4, h5{
   font-family: var(--font-title);
   font-weight: 500 !important;; /* Súper fino */
   color: var(--color-lila);
