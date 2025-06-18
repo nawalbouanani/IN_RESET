@@ -1,36 +1,85 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const About = () => {
+  const [visibleCards, setVisibleCards] = useState([]);
+  const [visibleFeatures, setVisibleFeatures] = useState([]);
+  const [isHeaderVisible, setIsHeaderVisible] = useState(false);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => setIsHeaderVisible(true), 200);
+            
+            // Mostrar ambos cards juntos (al mismo tiempo)
+            setTimeout(() => setVisibleCards([0, 1]), 600);
+
+            // Iconos visibles uno a uno
+            [0, 1, 2, 3].forEach((index) => {
+              setTimeout(() => {
+                setVisibleFeatures(prev => !prev.includes(index) ? [...prev, index] : prev);
+              }, 1400 + (index * 200));
+            });
+          }
+        });
+      },
+      { 
+        threshold: 0.2,
+        rootMargin: '0px 0px -100px 0px'
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="nosotros" className="min-vh-100 d-flex flex-column justify-content-center" style={{ 
-      backgroundColor: '#0a0a0a',
-      paddingTop: '10px', // Espacio para el navbar fijo
-      paddingBottom: '80px',
-      scrollMarginTop: '80px' // Para navegación suave
-    }}>
+    <section 
+      ref={sectionRef}
+      id="nosotros" 
+      className="position-relative" 
+      style={{ 
+        scrollMarginTop: '70px',
+        paddingTop: '60px',
+        paddingBottom: '100px',
+        overflow: 'hidden'
+      }}
+    >
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-12 col-lg-10">
             {/* Header */}
-            <div className="text-center mb-5">
-              <h2 className="title display-6 fw-bold mb-3"
+            <div className="row mb-5">
+              <div className="col-12 col-lg-8 mx-auto text-center">
+                <h2
+                  className="display-5 fw-light mb-0"
                   style={{
-                    background: '#442386',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text'
-                  }}>
-                Sobre Nosotros
-              </h2>
-              
-              <div
-                className="mx-auto mb-4"
-                style={{
-                  width: '60px',
-                  height: '2px',
-                  background: 'linear-gradient(90deg, transparent, #a855f7, transparent)',
-                  borderRadius: '1px'
-                }}>
+                    color: 'white',
+                    lineHeight: '1.2',
+                    letterSpacing: '-0.02em',
+                    fontWeight: '300',
+                    textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Sobre <span style={{ color: '#8B5CF6', fontWeight: '400' }}>Nosotros</span>
+                </h2>
+                
+                <p 
+                  className="mb-0 fs-5" 
+                  style={{ 
+                    lineHeight: '1.6',
+                    maxWidth: '600px',
+                    margin: '0 auto',
+                    color: 'rgba(255, 255, 255, 0.8)'
+                  }}
+                >
+                  ¿Qué nos hace diferentes?.
+                </p>
               </div>
             </div>
 
@@ -40,16 +89,44 @@ const About = () => {
                 <div
                   className="p-4 h-100 d-flex flex-column"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(168, 85, 247, 0.1))',
-                    borderRadius: '15px',
-                    border: '1px solid rgba(6, 182, 212, 0.2)',
-                    boxShadow: '0 8px 32px rgba(6, 182, 212, 0.1)'
+                    opacity: visibleCards.includes(0) ? 1 : 0,
+                    transform: visibleCards.includes(0) ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
+                    transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    borderRadius: '12px',
+                    border: visibleCards.includes(0) 
+                      ? '1px solid rgba(139, 92, 246, 0.25)'
+                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    boxShadow: visibleCards.includes(0) 
+                      ? '0 4px 20px rgba(139, 92, 246, 0.15)' 
+                      : '0 2px 15px rgba(0, 0, 0, 0.2)',
+                    cursor: 'pointer',
+                    minHeight: '180px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.25)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(139, 92, 246, 0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.25)';
                   }}
                 >
-                  <h3 className="h4 text-white mb-3">
+                  <h3 className="title mb-3" style={{ 
+                    color: 'white',
+                    fontSize: '1.3rem',
+                    lineHeight: '1.3',
+                    fontWeight: '400'
+                  }}>
                     Quiénes Somos
                   </h3>
-                  <p className="text-white-50 mb-0 lh-lg flex-grow-1">
+                  <p className="mb-0 flex-grow-1" style={{ 
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    lineHeight: '1.6',
+                    fontSize: '0.9rem'
+                  }}>
                     Somos la plataforma
                     <span className="text-white"> EdTech-HealthTech </span>
                     que convierte retos en proyectos escalables. 
@@ -62,19 +139,47 @@ const About = () => {
                 <div
                   className="p-4 h-100 d-flex flex-column"
                   style={{
-                    background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1))',
-                    borderRadius: '15px',
-                    border: '1px solid rgba(168, 85, 247, 0.2)',
-                    boxShadow: '0 8px 32px rgba(168, 85, 247, 0.1)'
+                    opacity: visibleCards.includes(1) ? 1 : 0,
+                    transform: visibleCards.includes(1) ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
+                    transition: 'all 1s cubic-bezier(0.16, 1, 0.3, 1)',
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    borderRadius: '12px',
+                    border: visibleCards.includes(1) 
+                      ? '1px solid rgba(139, 92, 246, 0.25)'
+                      : '1px solid rgba(255, 255, 255, 0.08)',
+                    boxShadow: visibleCards.includes(1) 
+                      ? '0 4px 20px rgba(139, 92, 246, 0.15)' 
+                      : '0 2px 15px rgba(0, 0, 0, 0.2)',
+                    cursor: 'pointer',
+                    minHeight: '180px'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-3px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(139, 92, 246, 0.25)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.3)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = '0 4px 20px rgba(139, 92, 246, 0.15)';
+                    e.currentTarget.style.borderColor = 'rgba(139, 92, 246, 0.25)';
                   }}
                 >
-                  <h3 className="h4 text-white mb-3 ">
+                  <h3 className="title mb-3" style={{ 
+                    color: 'white',
+                    fontSize: '1.3rem',
+                    lineHeight: '1.3',
+                    fontWeight: '400'
+                  }}>
                     Nuestra Misión
                   </h3>
-                  <p className="text-white-50 mb-0 lh-lg flex-grow-1">
+                  <p className="mb-0 flex-grow-1" style={{ 
+                    color: 'rgba(255, 255, 255, 0.7)',
+                    lineHeight: '1.6',
+                    fontSize: '0.9rem'
+                  }}>
                     Creemos que cada mujer puede resetear su futuro y crear  
                     <span className="text-white"> valor exponencial</span>.
-                    Convertimos problemas en soluciones escalables que transforman sectores completos.
+                    Convertimos problemas en <span className="text-white">soluciones escalables</span> que transforman sectores completos.
                   </p>
                 </div>
               </div>
@@ -84,48 +189,42 @@ const About = () => {
             <div className="row">
               <div className="col-12">
                 <div className="row g-4">
-                  <div className="col-12 col-sm-6 col-lg-3 text-center">
-                    <div className="p-3">
-                      <i className="fas fa-graduation-cap text-white fs-2 mb-3" style={{ 
-                        filter: 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.5))' 
-                      }}></i>
-                      <h5 className="subtitle text-white mb-2">EdTech</h5>
-                      <p className="text-white-50 small mb-0">Educación tecnológica innovadora</p>
+                  {[
+                    { icon: 'fas fa-graduation-cap', title: 'EdTech', desc: 'Educación tecnológica innovadora' },
+                    { icon: 'fas fa-capsules', title: 'HealthTech', desc: 'Soluciones de salud digital' },
+                    { icon: 'fas fa-rocket', title: 'Impacto', desc: 'Proyectos con impacto real' },
+                    { icon: 'far fa-gem', title: 'Mujeres', desc: 'Diseñado por y para mujeres' }
+                  ].map((feature, index) => (
+                    <div key={index} className="col-12 col-sm-6 col-lg-3 text-center">
+                      <div 
+                        className="p-3"
+                        style={{
+                          opacity: visibleFeatures.includes(index) ? 1 : 0,
+                          transform: visibleFeatures.includes(index) ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.9)',
+                          transition: `all 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`
+                        }}
+                      >
+                        <i className={`${feature.icon} fs-2 mb-3`} style={{ 
+                          color: visibleFeatures.includes(index) 
+                            ? '#8B5CF6'
+                            : 'rgba(255, 255, 255, 0.3)',
+                          transition: 'all 0.5s ease'
+                        }}></i>
+                        <h5 className="title text-white mb-2" style={{
+                          fontSize: '1.1rem',
+                          fontWeight: '400'
+                        }}>{feature.title}</h5>
+                        <p className="small mb-0" style={{ 
+                          color: 'rgba(255, 255, 255, 0.7)',
+                          fontSize: '0.85rem'
+                        }}>{feature.desc}</p>
+                      </div>
                     </div>
-                  </div>
-
-                  <div className="col-12 col-sm-6 col-lg-3 text-center">
-                    <div className="p-3">
-                      <i className="fas fa-capsules text-white fs-2 mb-3" style={{ 
-                        filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.5))' 
-                      }}></i>
-                      <h5 className="subtitle text-white mb-2 ">HealthTech</h5>
-                      <p className="text-white-50 small mb-0">Soluciones de salud digital</p>
-                    </div>
-                  </div>
-
-                  <div className="col-12 col-sm-6 col-lg-3 text-center">
-                    <div className="p-3">
-                      <i className="fas fa-rocket text-white fs-2 mb-3" style={{ 
-                        filter: 'drop-shadow(0 0 10px rgba(168, 85, 247, 0.5))' 
-                      }}></i>
-                      <h5 className="subtitle text-white mb-2">Impacto</h5>
-                      <p className="text-white-50 small mb-0">Proyectos con impacto real</p>
-                    </div>
-                  </div>
-
-                  <div className="col-12 col-sm-6 col-lg-3 text-center">
-                    <div className="p-3">
-                      <i className="far fa-gem text-white fs-2 mb-3" style={{ 
-                        filter: 'drop-shadow(0 0 10px rgba(6, 182, 212, 0.5))' 
-                      }}></i>
-                      <h5 className="subtitle text-white mb-2">Mujeres</h5>
-                      <p className="text-white-50 small mb-0">Diseñado por y para mujeres</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </div>

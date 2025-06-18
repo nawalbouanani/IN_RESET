@@ -139,7 +139,7 @@ const ContactModal = ({ show, handleClose }) => {
               <div className="col-12 col-lg-6 d-flex">
                 <div className="p-3 w-100 d-flex flex-column" >
                   <div>
-                    <h2 className="text-white text-start mt-3 mb-3" style={titleStyle}>CONTÁCTANOS</h2>
+                    <h2 className="text-white text-start mt-1 mb-3" style={titleStyle}>CONTÁCTANOS</h2>
                   </div>
                   <form onSubmit={handleSubmit} className="d-flex flex-column gap-2">
                     <div className="row g-2">
