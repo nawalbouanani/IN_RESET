@@ -12,21 +12,16 @@ const About = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setTimeout(() => setIsHeaderVisible(true), 200);
-            setTimeout(() => {
-              setVisibleCards(prev => !prev.includes(0) ? [...prev, 0] : prev);
-            }, 600);
-            setTimeout(() => {
-              setVisibleCards(prev => !prev.includes(1) ? [...prev, 1] : prev);
-            }, 1000);
+            
+            // Mostrar ambos cards juntos (al mismo tiempo)
+            setTimeout(() => setVisibleCards([0, 1]), 600);
+
+            // Iconos visibles uno a uno
             [0, 1, 2, 3].forEach((index) => {
               setTimeout(() => {
                 setVisibleFeatures(prev => !prev.includes(index) ? [...prev, index] : prev);
               }, 1400 + (index * 200));
             });
-          } else {
-            setIsHeaderVisible(false);
-            setVisibleCards([]);
-            setVisibleFeatures([]);
           }
         });
       },
@@ -49,7 +44,7 @@ const About = () => {
       id="nosotros" 
       className="position-relative" 
       style={{ 
-        scrollMarginTop: '70px', // <-- Esto asegura que al hacer click en el navbar, el título quede visible
+        scrollMarginTop: '70px',
         paddingTop: '60px',
         paddingBottom: '100px',
         overflow: 'hidden'
@@ -60,33 +55,33 @@ const About = () => {
           <div className="col-12 col-lg-10">
             {/* Header */}
             <div className="row mb-5">
-          <div className="col-12 col-lg-8 mx-auto text-center">
-            <h2
-              className="display-5 fw-light mb-2"
-              style={{
-                color: 'white',
-                lineHeight: '1.2',
-                letterSpacing: '-0.02em',
-                fontWeight: '300',
-                textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-              }}
-            >
-              Sobre <span style={{ color: '#8B5CF6', fontWeight: '400' }}>Nosotros</span>
-            </h2>
-            
-            <p 
-              className="mb-0 fs-5" 
-              style={{ 
-                lineHeight: '1.6',
-                maxWidth: '600px',
-                margin: '0 auto',
-                color: 'rgba(255, 255, 255, 0.8)'
-              }}
-            >
-              ¿Qué nos hace diferente?.
-            </p>
-          </div>
-        </div>
+              <div className="col-12 col-lg-8 mx-auto text-center">
+                <h2
+                  className="display-5 fw-light mb-0"
+                  style={{
+                    color: 'white',
+                    lineHeight: '1.2',
+                    letterSpacing: '-0.02em',
+                    fontWeight: '300',
+                    textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                  }}
+                >
+                  Sobre <span style={{ color: '#8B5CF6', fontWeight: '400' }}>Nosotros</span>
+                </h2>
+                
+                <p 
+                  className="mb-0 fs-5" 
+                  style={{ 
+                    lineHeight: '1.6',
+                    maxWidth: '600px',
+                    margin: '0 auto',
+                    color: 'rgba(255, 255, 255, 0.8)'
+                  }}
+                >
+                  ¿Qué nos hace diferentes?.
+                </p>
+              </div>
+            </div>
 
             {/* Content - Cards de Misión y Qué Somos */}
             <div className="row align-items-stretch mb-5">
@@ -184,7 +179,7 @@ const About = () => {
                   }}>
                     Creemos que cada mujer puede resetear su futuro y crear  
                     <span className="text-white"> valor exponencial</span>.
-                    Convertimos problemas en soluciones escalables que transforman sectores completos.
+                    Convertimos problemas en <span className="text-white">soluciones escalables</span> que transforman sectores completos.
                   </p>
                 </div>
               </div>

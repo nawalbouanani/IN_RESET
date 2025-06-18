@@ -8,32 +8,27 @@ const TechEmpowermentProducts = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setTimeout(() => setIsHeaderVisible(true), 200);
-            setTimeout(() => {
-              setVisibleCards(prev => !prev.includes(0) ? [...prev, 0] : prev);
-            }, 600);
-            setTimeout(() => {
-              setVisibleCards(prev => !prev.includes(1) ? [...prev, 1] : prev);
-            }, 1000);
-          } else {
-            setIsHeaderVisible(false);
-            setVisibleCards([]);
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
-    );
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !isHeaderVisible) {
+          setTimeout(() => {
+            setIsHeaderVisible(true);
+            setVisibleCards([0, 1]); // Mostrar ambas tarjetas a la vez
+          }, 400); // Tiempo de espera antes de mostrar (puedes ajustar)
+        }
+      });
+    },
+    { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+  );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
+  if (sectionRef.current) {
+    observer.observe(sectionRef.current);
+  }
 
-    return () => observer.disconnect();
-  }, []);
+  return () => observer.disconnect();
+}, [isHeaderVisible]);
+
 
   const projects = [
     {

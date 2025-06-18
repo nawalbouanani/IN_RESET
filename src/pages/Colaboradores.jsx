@@ -79,23 +79,18 @@ const Colaboradores = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsInView(true);
-            // Animación secuencial de elementos
-            colaboradoresData.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleItems(prev => {
-                  if (!prev.includes(index)) {
-                    return [...prev, index];
-                  }
-                  return prev;
-                });
-              }, index * 200); // 200ms entre cada elemento
-            });
-          } else {
-            // Cuando sale de la vista, resetear todo
-            setIsInView(false);
-            setVisibleItems([]);
-          }
+  setIsInView(true);
+  colaboradoresData.forEach((_, index) => {
+    setTimeout(() => {
+      setVisibleItems(prev => {
+        if (!prev.includes(index)) {
+          return [...prev, index];
+        }
+        return prev;
+      });
+    }, index * 200);
+  });
+}
         });
       },
       { 
@@ -128,7 +123,7 @@ const Colaboradores = () => {
         <div className="row mb-5">
           <div className="col-12 col-lg-8 mx-auto text-center">
             <h2
-              className="display-5 fw-light mb-2"
+              className="display-5 fw-light mb-0"
               style={{
                 color: 'white',
                 lineHeight: '1.2',
@@ -137,11 +132,11 @@ const Colaboradores = () => {
                 textShadow: '0 2px 4px rgba(0,0,0,0.3)'
               }}
             >
-              Colabora con <span style={{ color: '#8B5CF6', fontWeight: '400' }}>nosotras</span>
+              Colabora con <span style={{ color: '#8B5CF6', fontWeight: '400' }}>Nosotros</span>
             </h2>
             
             <p 
-              className="mb-4 fs-5" 
+              className="mb-1 fs-5" 
               style={{ 
                 lineHeight: '1.6',
                 maxWidth: '600px',
@@ -283,7 +278,7 @@ const Colaboradores = () => {
                           className="btn fw-semibold px-3 py-2"
                           onClick={() => openWhatsAppChat(item.whatsappMessage)}
                           style={{
-                            background: 'linear-gradient(135deg, #8B5CF6,rgb(121, 24, 160))',
+                            background: 'linear-gradient(135deg, #8B5CF6)',
                             border: 'none',
                             color: 'white',
                             borderRadius: '8px',
@@ -340,7 +335,7 @@ const Colaboradores = () => {
                 className="btn px-4 py-2 fw-semibold"
                 onClick={handleOpenContactModal}
                 style={{
-                  background: 'linear-gradient(135deg, #8B5CF6,rgb(121, 24, 160))',
+                  background: 'linear-gradient(135deg, #8B5CF6)',
                   border: 'none',
                   color: 'white',
                   borderRadius: '8px',

@@ -34,23 +34,18 @@ const Pilares = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setIsInView(true);
-            // Animación secuencial de elementos
-            pilares.forEach((_, index) => {
-              setTimeout(() => {
-                setVisibleItems(prev => {
-                  if (!prev.includes(index)) {
-                    return [...prev, index];
-                  }
-                  return prev;
-                });
-              }, index * 800); // 800ms entre cada elemento
-            });
-          } else {
-            // Cuando sale de la vista, resetear todo
-            setIsInView(false);
-            setVisibleItems([]);
-          }
+  setIsInView(true);
+  pilares.forEach((_, index) => {
+    setTimeout(() => {
+      setVisibleItems(prev => {
+        if (!prev.includes(index)) {
+          return [...prev, index];
+        }
+        return prev;
+      });
+    }, index * 800);
+  });
+}
         });
       },
       { 
@@ -86,10 +81,10 @@ const Pilares = () => {
     >
       <div className="container position-relative">
         {/* Header */}
-        <div className="row mb-5">
+        <div className="row mb-0">
           <div className="col-12 col-lg-8 mx-auto text-center">
             <h2
-              className="display-5 fw-light mb-2"
+              className="display-5 fw-light mb-0"
               style={{
                 color: 'white',
                 lineHeight: '1.2',
