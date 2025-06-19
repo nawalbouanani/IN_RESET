@@ -48,27 +48,27 @@ const Hero = () => {
             onSpeedUp: () => console.log("Speed up!"),
             onSlowDown: () => console.log("Slow down!"),
             distortion: "turbulentDistortion",
-            length: 200,                      // Un poco más largo (de 300 a 350)
-            roadWidth: 4,                     // Ligeramente más ancho (de 8 a 9)
-            lanesPerRoad: 2,                  // Un carril más (de 3 a 4)
+            length: 350,                      // Un poco más largo (de 300 a 350)
+            roadWidth: 9,                     // Ligeramente más ancho (de 8 a 9)
+            lanesPerRoad: 4,                  // Un carril más (de 3 a 4)
             islandWidth: 2,
-            fov: 70,
-            fovSpeedUp: 90,                  // Un poco más de efecto (de 120 a 130)
-            speedUp: 1.1,                     // Ligeramente más rápido (de 1 a 1.2)
+            fov: 90,
+            fovSpeedUp: 130,                  // Un poco más de efecto (de 120 a 130)
+            speedUp: 1.2,                     // Ligeramente más rápido (de 1 a 1.2)
             carLightsFade: 0.4,
-            totalSideLightSticks: 15,         // Solo 2 más (de 10 a 12)
-            lightPairsPerRoadWay: 20,         // Solo 3 más (de 15 a 18)
+            totalSideLightSticks: 12,         // Solo 2 más (de 10 a 12)
+            lightPairsPerRoadWay: 18,         // Solo 3 más (de 15 a 18)
             shoulderLinesWidthPercentage: 0.05,
             brokenLinesWidthPercentage: 0.1,
             brokenLinesLengthPercentage: 0.5,
             lightStickWidth: [0.12, 0.5],
             lightStickHeight: [1.3, 1.7],
-            movingAwaySpeed: [0, 0],        // Un poco más rápido
-            movingCloserSpeed: [0, 0],    // Un poco más rápido
-            carLightsLength: [25, 50],        // Luces un poco más largas
+            movingAwaySpeed: [15, 25],        // Un poco más rápido
+            movingCloserSpeed: [-40, -60],    // Un poco más rápido
+            carLightsLength: [10, 50],        // Luces un poco más largas
             carLightsRadius: [0.05, 0.16],    // Ligeramente más grandes
             carWidthPercentage: [0.3, 0.5],
-            carShiftX: [0, 0],
+            carShiftX: [-0.8, 0.8],
             carFloorSeparation: [0, 5],
             colors: {
               roadColor: 0x0b001f,
