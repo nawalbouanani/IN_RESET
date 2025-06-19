@@ -71,14 +71,27 @@ const Hero = () => {
               carShiftX: [-0.8, 0.8],
               carFloorSeparation: [0, 5],
               colors: {
-                roadColor: 0x0b001f,
-                islandColor: 0x0a0a0a,
-                background: 0x000000,
-                shoulderLines: 0x4c2772,
-                brokenLines: 0x6b2b89,
-                leftCars: [0x9b59b6, 0x8e44ad, 0xbe93d4],
-                rightCars: [0x7f5a83, 0xaa6cc1, 0xcaa6e7],
-                sticks: 0x000000,
+                roadColor: 0x0b001f,        // más oscuro quergb(33, 27, 44)
+                islandColor: 0x000000,      // tono púrpura profundo
+                background: 0x000000,       // fondo sigue negro
+                shoulderLines: 0xffffff,
+                brokenLines: 0xffffff,
+                leftCars: [
+                  0x6e409b, // violeta oscuro
+                  0x5c3685, // morado medio
+                  0x472b6a, // morado grisáceo
+                  0xb595e0, // 💡 lavanda claro/brillante (#B595E0)
+                  0xa472d9  // 💡 violeta pastel (#A472D9)
+                ],
+
+                rightCars: [
+                  0x5a3b83, // violeta apagado
+                  0x7a4fa7, // morado vivo medio
+                  0x68408f, // intermedio
+                  0xceb1f1, // 💡 lila claro brillante (#CEB1F1)
+                  0xbc8fe6  // 💡 lavanda medio (#BC8FE6)
+                ],
+                sticks: 0x00000,
               },
             }}
           />  
