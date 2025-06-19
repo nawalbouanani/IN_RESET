@@ -47,7 +47,7 @@ const Hero = () => {
             effectOptions={{
               onSpeedUp: () => console.log("Speed up!"),
               onSlowDown: () => console.log("Slow down!"),
-              distortion: "turbulentDistortion",
+              distortion: "fisheye",
               length: 350,                      // Un poco más largo (de 300 a 350)
               roadWidth: 9,                     // Ligeramente más ancho (de 8 a 9)
               lanesPerRoad: 4,                  // Un carril más (de 3 a 4)
