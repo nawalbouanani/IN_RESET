@@ -10,6 +10,38 @@
 }
 
 
+/* --- Corrección para el modal del Footer --- */
+.footer-modal-content,
+.footer-modal-content * {
+  color: white !important;
+}
+.footer-modal-content,
+.footer-modal-content p,
+.footer-modal-content a,
+.footer-modal-content button,
+.footer-modal-content label,
+.footer-modal-content small,
+.footer-modal-content span,
+.footer-modal-content ul,
+.footer-modal-content li {
+  font-family: var(--font-secondary);
+  font-weight: 300;
+  letter-spacing: normal;
+  line-height: 1.5;
+  color: white; /* fuerza blanco */
+  text-transform: none;
+  margin-bottom: 0.75rem; /* opcional para separar ítems */
+  padding-left: 1.2rem; /* para las listas */
+}
+
+
+
+.modal-content {
+  max-height: 70vh; /* máximo 70% de la altura de la ventana */
+  overflow-y: auto; /* permite scroll vertical */
+  padding: 1rem; /* opcional, para que no quede pegado */
+}
+
 h1.hero-title, .glow-text {
   font-family: var(--font-title);
   font-weight: 800;
