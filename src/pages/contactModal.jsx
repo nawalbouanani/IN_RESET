@@ -25,7 +25,7 @@ const ContactModal = ({ show, handleClose }) => {
     });
   };
 
-  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mldnbvpa";
+  const WEB3FORMS_ACCESS_KEY = "d044fe50-f8b6-4957-9bc1-b570bd11e785"; // Usa tu propia key
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,29 +36,37 @@ const ContactModal = ({ show, handleClose }) => {
       return;
     }
 
+    const intereses = [];
+    if (formData.empresasMarcas) intereses.push("Empresas & Marcas");
+    if (formData.inversores) intereses.push("Inversores");
+    if (formData.patrocinadores) intereses.push("Patrocinadores");
+    if (formData.coCreacion) intereses.push("Co-creación");
+
+    const payload = {
+      access_key: WEB3FORMS_ACCESS_KEY,
+      name: `${formData.nombre} ${formData.apellido}`,
+      email: formData.email,
+      phone: formData.telefono,
+      message: formData.mensaje,
+      intereses: intereses.join(', '),
+      subject: "Nuevo contacto desde IN RESET",
+      from_name: "Formulario IN RESET",
+      botcheck: ""
+    };
+
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
-        method: 'POST',
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+          "Content-Type": "application/json",
+          "Accept": "application/json"
         },
-        body: JSON.stringify({
-          nombre: formData.nombre,
-          apellido: formData.apellido,
-          email: formData.email,
-          telefono: formData.telefono,
-          mensaje: formData.mensaje,
-          intereses: {
-            empresasMarcas: formData.empresasMarcas,
-            inversores: formData.inversores,
-            patrocinadores: formData.patrocinadores,
-            coCreacion: formData.coCreacion,
-          }
-        }),
+        body: JSON.stringify(payload)
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.success) {
         setShowSuccessMessage(true);
         setFormData({
           nombre: '',
@@ -77,13 +85,21 @@ const ContactModal = ({ show, handleClose }) => {
           setShowSuccessMessage(false);
           handleClose();
         }, 2000);
-
       } else {
-        alert('Hubo un error al enviar el mensaje. Inténtalo de nuevo.');
+        console.error('Error from Web3Forms:', result);
+        alert(`Error: ${result.message || 'Hubo un error al enviar el mensaje. Inténtalo de nuevo.'}`);
       }
+
     } catch (error) {
       console.error('Error al enviar formulario:', error);
-      alert('Error de red. Por favor, intenta nuevamente.');
+
+      if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        alert('Error de conexión. Verifica tu conexión a internet e inténtalo nuevamente.');
+      } else if (error.message.includes('HTTP error')) {
+        alert('Error del servidor. Por favor, intenta nuevamente en unos minutos.');
+      } else {
+        alert('Error inesperado. Por favor, intenta nuevamente.');
+      }
     }
   };
 
@@ -183,7 +199,6 @@ const ContactModal = ({ show, handleClose }) => {
                       <label htmlFor="mensaje" className="form-label mb-2" style={labelStyle}>Mensaje</label>
                       <textarea id="mensaje" name="mensaje" rows="2" value={formData.mensaje} onChange={handleChange} required className="form-control" style={formControlStyleInputs}></textarea>
                     </div>
-
 
                     <div className="form-check mt-2 mb-4">
                       <input type="checkbox" id="privacidad" name="privacidad" checked={formData.privacidad} onChange={handleChange} required className="form-check-input" style={checkboxStyle(formData.privacidad)} />
