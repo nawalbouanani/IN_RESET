@@ -78,7 +78,7 @@ export const Navbar = () => {
                 Sobre Nosotros
               </a>
             </li>
-            <li className="nav-item">
+            {/*<li className="nav-item">
               <a className="nav-link text-white mx-2 py-1" href="#pilares"
                 style={{
                   transition: 'color 0.3s ease',
@@ -101,7 +101,7 @@ export const Navbar = () => {
                 onMouseOut={(e) => e.target.style.color = 'white'}>
                 Proyectos
               </a>
-            </li>
+            </li>*/}
             <li className="nav-item">
               <a className="nav-link text-white mx-2 py-1" href="#contacto"
                 style={{

@@ -8,35 +8,17 @@ export const Footer = () => {
   return (
     <footer className="bg-black text-white py-5 mt-auto border-top border-secondary border-opacity-25">
       <div className="container">
-        <div className="row justify-content-center g-4">
-          {/* Columna de Producto */}
-          <div className="col-12 col-md-3 text-center text-md-start">
-            <h5 className="fs-6 fw-bold mb-3 text-white">Producto</h5>
-            <ul className="list-unstyled mb-0">
-              <li className="mb-2">
-                <a href="#producto-soluciones" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Soluciones</a>
-              </li>
-              <li className="mb-2">
-                <a href="#producto-educacion" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Educación</a>
-              </li>
-              <li className="mb-2">
-                <a href="#producto-equipo" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Equipo</a>
-              </li>
-            </ul>
-          </div>
+        <div className="row justify-content-start g-4">          
 
           {/* Columna de Soporte */}
           <div className="col-12 col-md-3 text-center text-md-start">
             <h5 className="fs-6 fw-bold mb-3 text-white">Soporte</h5>
             <ul className="list-unstyled mb-0">
               <li className="mb-2">
-                <a href="#soporte-ayuda" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Centro de ayuda</a>
+                <a href="#soporte-ayuda" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Política de Privacidad</a>
               </li>
               <li className="mb-2">
                 <a href="#soporte-terminos" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Términos y Servicios</a>
-              </li>
-              <li className="mb-2">
-                <a href="#soporte-sitio" className="text-white-50 text-decoration-none link-light link-opacity-75-hover fs-7">Sitio</a>
               </li>
             </ul>
           </div>
@@ -71,12 +53,11 @@ export const Footer = () => {
                     <FontAwesomeIcon icon={faInstagram} className="fa-lg text-primary-hover" />
                 </a>
                 {/* Reemplaza "https://www.tiktok.com/@tu_empresa_tiktok" con tu URL real de TikTok */}
-                <a href="https://www.tiktok.com/@IN_RESET" target="_blank" rel="noopener noreferrer" className="text-white text-decoration-none">
+                <a href="https://www.tiktok.com/@in_reset?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="text-white text-decoration-none">
                     <FontAwesomeIcon icon={faTiktok} className="fa-lg text-primary-hover" />
                 </a>
             </div>
         </div>
-
       </div>
     </footer>
   );
