@@ -48,12 +48,12 @@ const Hero = () => {
             onSpeedUp: () => console.log("Speed up!"),
             onSlowDown: () => console.log("Slow down!"),
             distortion: "turbulentDistortion",
-            length: 350,                      // Un poco más largo (de 300 a 350)
-            roadWidth: 8,                     // Ligeramente más ancho (de 8 a 9)
-            lanesPerRoad: 3,                  // Un carril más (de 3 a 4)
+            length: 200,                      // Un poco más largo (de 300 a 350)
+            roadWidth: 4,                     // Ligeramente más ancho (de 8 a 9)
+            lanesPerRoad: 2,                  // Un carril más (de 3 a 4)
             islandWidth: 2,
-            fov: 40,
-            fovSpeedUp: 50,                  // Un poco más de efecto (de 120 a 130)
+            fov: 70,
+            fovSpeedUp: 90,                  // Un poco más de efecto (de 120 a 130)
             speedUp: 1.1,                     // Ligeramente más rápido (de 1 a 1.2)
             carLightsFade: 0.4,
             totalSideLightSticks: 15,         // Solo 2 más (de 10 a 12)
