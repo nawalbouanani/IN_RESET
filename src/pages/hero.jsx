@@ -45,56 +45,56 @@ const Hero = () => {
     <section  id="hero" className="hero-section">
       <div className="hero-content">
         <div className="container-fluid px-2 px-md-3">
-          <div className="row align-items-center justify-content-between">
+          <div className="row align-items-center justify-content-between">           
             <Hyperspeed
-          effectOptions={{
-            onSpeedUp: () => console.log("Speed up!"),
-            onSlowDown: () => console.log("Slow down!"),
-            distortion: "turbulentDistortion",
-            length: 350,                      // Un poco más largo (de 300 a 350)
-            roadWidth: 9,                     // Ligeramente más ancho (de 8 a 9)
-            lanesPerRoad: 4,                  // Un carril más (de 3 a 4)
-            islandWidth: 2,
-            fov: 90,
-            fovSpeedUp: 130,                  // Un poco más de efecto (de 120 a 130)
-            speedUp: 1.2,                     // Ligeramente más rápido (de 1 a 1.2)
-            carLightsFade: 0.4,
-            totalSideLightSticks: 12,         // Solo 2 más (de 10 a 12)
-            lightPairsPerRoadWay: 18,         // Solo 3 más (de 15 a 18)
-            shoulderLinesWidthPercentage: 0.05,
-            brokenLinesWidthPercentage: 0.1,
-            brokenLinesLengthPercentage: 0.5,
-            lightStickWidth: [0.12, 0.5],
-            lightStickHeight: [1.3, 1.7],
-            movingAwaySpeed: [15, 25],        // Un poco más rápido
-            movingCloserSpeed: [-40, -60],    // Un poco más rápido
-            carLightsLength: [10, 50],        // Luces un poco más largas
-            carLightsRadius: [0.05, 0.16],    // Ligeramente más grandes
-            carWidthPercentage: [0.3, 0.5],
-            carShiftX: [-0.8, 0.8],
-            carFloorSeparation: [0, 5],
-            colors: {
-              roadColor: 0x0b001f,
-              islandColor: 0x000000,
-              background: 0x000000,
-              shoulderLines: 0xffffff,
-              brokenLines: 0xffffff,
-              leftCars: [
-                0x6e409b,
-                0x5c3685,
-                0x472b6a,
-                0xb595e0,
-                0xa472d9
-              ],
-              rightCars: [
-                0x5a3b83,
-                0x7a4fa7,
-                0x68408f,
-                0xceb1f1,
-                0xbc8fe6
-              ],
-              sticks: 0x00000,
-            },
+            effectOptions={{
+              onSpeedUp: () => console.log("Speed up!"),
+              onSlowDown: () => console.log("Slow down!"),
+              distortion: "turbulentDistortion",
+              length: 350,                      // Un poco más largo (de 300 a 350)
+              roadWidth: 9,                     // Ligeramente más ancho (de 8 a 9)
+              lanesPerRoad: 4,                  // Un carril más (de 3 a 4)
+              islandWidth: 2,
+              fov: 90,
+              fovSpeedUp: 130,                  // Un poco más de efecto (de 120 a 130)
+              speedUp: 1.2,                     // Ligeramente más rápido (de 1 a 1.2)
+              carLightsFade: 0.4,
+              totalSideLightSticks: 12,         // Solo 2 más (de 10 a 12)
+              lightPairsPerRoadWay: 18,         // Solo 3 más (de 15 a 18)
+              shoulderLinesWidthPercentage: 0.05,
+              brokenLinesWidthPercentage: 0.1,
+              brokenLinesLengthPercentage: 0.5,
+              lightStickWidth: [0.12, 0.5],
+              lightStickHeight: [1.3, 1.7],
+              movingAwaySpeed: [15, 25],        // Un poco más rápido
+              movingCloserSpeed: [-40, -60],    // Un poco más rápido
+              carLightsLength: [10, 50],        // Luces un poco más largas
+              carLightsRadius: [0.05, 0.16],    // Ligeramente más grandes
+              carWidthPercentage: [0.3, 0.5],
+              carShiftX: [-0.8, 0.8],
+              carFloorSeparation: [0, 5],
+              colors: {
+                roadColor: 0x0b001f,
+                islandColor: 0x000000,
+                background: 0x000000,
+                shoulderLines: 0xffffff,
+                brokenLines: 0xffffff,
+                leftCars: [
+                  0x6e409b,
+                  0x5c3685,
+                  0x472b6a,
+                  0xb595e0,
+                  0xa472d9
+                ],
+                rightCars: [
+                  0x5a3b83,
+                  0x7a4fa7,
+                  0x68408f,
+                  0xceb1f1,
+                  0xbc8fe6
+                ],
+                sticks: 0x00000,
+              },
           }}
           />
 
