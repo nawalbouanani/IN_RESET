@@ -63,12 +63,12 @@ const Hero = () => {
             brokenLinesLengthPercentage: 0.5,
             lightStickWidth: [0.12, 0.5],
             lightStickHeight: [1.3, 1.7],
-            movingAwaySpeed: [5, 10],        // Un poco más rápido
-            movingCloserSpeed: [-15, -25],    // Un poco más rápido
+            movingAwaySpeed: [0, 0],        // Un poco más rápido
+            movingCloserSpeed: [0, 0],    // Un poco más rápido
             carLightsLength: [25, 50],        // Luces un poco más largas
             carLightsRadius: [0.05, 0.16],    // Ligeramente más grandes
             carWidthPercentage: [0.3, 0.5],
-            carShiftX: [-0.8, 0.8],
+            carShiftX: [0, 0],
             carFloorSeparation: [0, 5],
             colors: {
               roadColor: 0x0b001f,
