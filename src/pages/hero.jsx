@@ -47,24 +47,24 @@ const Hero = () => {
           effectOptions={{
             onSpeedUp: () => console.log("Speed up!"),
             onSlowDown: () => console.log("Slow down!"),
-            distortion: "LongRaceDistortion",       // 1. Cambio a curvas abiertas
-            length: 200,                            // 2. Era 350, ahora 200
-            roadWidth: 4,                           // 3. Era 9, ahora 4
-            lanesPerRoad: 2,                        // 4. Era 4, ahora 2
+            distortion: "turbulentDistortion",       // 1. Cambio a curvas abiertas
+            length: 300,                            // 2. Era 350, ahora 200
+            roadWidth: 9,                           // 3. Era 9, ahora 4
+            lanesPerRoad: 4,                        // 4. Era 4, ahora 2
             islandWidth: 2,
             speedUp: 1.2,
             fovSpeedUp: 90,
             fov: 75,
             carLightsFade: 0.6,
-            totalSideLightSticks: 6,                // 5. Era 15, ahora 6
-            lightPairsPerRoadWay: 10,               // 5. Era 20, ahora 10
+            totalSideLightSticks: 15,                // 5. Era 15, ahora 6
+            lightPairsPerRoadWay: 20,               // 5. Era 20, ahora 10
             shoulderLinesWidthPercentage: 0.05,
             brokenLinesWidthPercentage: 0.1,
             brokenLinesLengthPercentage: 0.5,
             lightStickWidth: [0.12, 0.5],
             lightStickHeight: [1.3, 1.7],
-            movingAwaySpeed: [20, 40],
-            movingCloserSpeed: [-60, -80],
+            movingAwaySpeed: [10, 20],
+            movingCloserSpeed: [-40, -60],
             carLightsLength: [20, 50],
             carLightsRadius: [0.05, 0.16],
             carWidthPercentage: [0.3, 0.5],
