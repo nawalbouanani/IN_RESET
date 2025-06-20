@@ -10,18 +10,20 @@ const Hero = () => {
   const words = ['Educación', 'Tecnología', 'Experiencias'];
   
   const awards = [
-    'Startup del Año 2024',
-    'Innovation Award', 
-    'Best EdTech Platform',
-    'Top 10 HealthTech',
-    'Female Leadership Prize',
-    'Tech Excellence Award',
-    'Startup del Año 2024',
-    'Innovation Award',
-    'Best EdTech Platform', 
-    'Top 10 HealthTech',
-    'Female Leadership Prize',
-    'Tech Excellence Award'
+    'Premios Fundadoras 2024',
+    'Featured Las Provincias', 
+    'Premio UE Madrid',
+    'Social Nest Foundation',
+    'Valencia Plaza Interview',
+    'FORINVEST 2024',
+    'VDS 2024',
+    'Premios Fundadoras 2024',
+    'Featured Las Provincias', 
+    'Premio UE Madrid',
+    'Social Nest Foundation',
+    'Valencia Plaza Interview',
+    'FORINVEST 2024',
+    'VDS 2024'
   ];
 
   useEffect(() => {
