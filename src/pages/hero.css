@@ -110,7 +110,7 @@
 }
 
 .awards-scroll.animated {
-  animation: scrollInfinite 25s linear infinite;
+  animation: scrollInfinite 10s linear infinite;
 }
 
 .award-item {
