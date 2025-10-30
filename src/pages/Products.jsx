@@ -8,40 +8,40 @@ const TechEmpowermentProducts = () => {
   const sectionRef = useRef(null);
 
   useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !isHeaderVisible) {
-          setTimeout(() => {
-            setIsHeaderVisible(true);
-            setVisibleCards([0, 1]); // Mostrar ambas tarjetas a la vez
-          }, 400); // Tiempo de espera antes de mostrar (puedes ajustar)
-        }
-      });
-    },
-    { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
-  );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isHeaderVisible) {
+            setTimeout(() => {
+              setIsHeaderVisible(true);
+              setVisibleCards([0, 1]); // Mostrar ambas tarjetas a la vez
+            }, 400);
+          }
+        });
+      },
+      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+    );
 
-  if (sectionRef.current) {
-    observer.observe(sectionRef.current);
-  }
-
-  return () => observer.disconnect();
-}, [isHeaderVisible]);
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [isHeaderVisible]);
 
   const projects = [
     {
-      title: "HER CODE",
+      title: "HERCODE",
       subtitle: "La Catapulta Tecnológica Femenina",
       description: "Gamificación + STEAM",
-      image: herCodeImage
+      image: herCodeImage,
+      link: null,
+      showBadge: true
     },
     {
-      title: "DE FEMME",
-      subtitle: "La Revolución del Bienestar Femenino",
-      description: "IA + Autocuidado + Autodefensa",
-      image: defemmeImage
+      title: "HERSAFE",
+      subtitle: "La Revolución del Aprendizaje Femenino",
+      description: "Seguridad + Salud + Bienestar",
+      image: defemmeImage,
+      link: "https://wearehersafe.com",
+      showBadge: false
     }
   ];
 
@@ -93,6 +93,9 @@ const TechEmpowermentProducts = () => {
             <div 
               key={idx} 
               className="d-flex flex-column align-items-stretch"
+              onClick={() => {
+                if (project.link) window.open(project.link, "_blank");
+              }}
               style={{
                 opacity: visibleCards.includes(idx) ? 1 : 0,
                 transform: visibleCards.includes(idx) ? 'translateY(0) scale(1)' : 'translateY(30px) scale(0.95)',
@@ -105,7 +108,7 @@ const TechEmpowermentProducts = () => {
                 boxShadow: visibleCards.includes(idx)
                   ? '0 4px 20px rgba(139, 92, 246, 0.15)'
                   : '0 2px 15px rgba(0, 0, 0, 0.2)',
-                cursor: 'pointer',
+                cursor: project.link ? 'pointer' : 'default',
                 overflow: 'hidden',
                 width: '100%',
                 maxWidth: '540px',
@@ -121,23 +124,25 @@ const TechEmpowermentProducts = () => {
                 minHeight: '180px',
                 backgroundImage: `url(${project.image})`,
                 backgroundSize: 'contain',
-backgroundRepeat: 'no-repeat',
+                backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 position: 'relative'
               }}>
-                <div className="position-absolute top-0 start-0 m-3" style={{ zIndex: 3 }}>
-                  <span className="badge px-3 py-1 text-white fw-normal"
-                        style={{ 
-                          background: 'rgba(139, 92, 246, 0.9)',
-                          borderRadius: '20px',
-                          fontSize: '0.7rem',
-                          fontWeight: '300',
-                          textTransform: 'uppercase',
-                          letterSpacing: '0.5px'
-                        }}>
-                    En Desarrollo
-                  </span>
-                </div>
+                {project.showBadge && (
+                  <div className="position-absolute top-0 start-0 m-3" style={{ zIndex: 3 }}>
+                    <span className="badge px-3 py-1 text-white fw-normal"
+                          style={{ 
+                            background: 'rgba(139, 92, 246, 0.9)',
+                            borderRadius: '20px',
+                            fontSize: '0.7rem',
+                            fontWeight: '300',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.5px'
+                          }}>
+                      En Desarrollo
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div className="p-4 d-flex flex-column justify-content-center text-center text-md-start">
